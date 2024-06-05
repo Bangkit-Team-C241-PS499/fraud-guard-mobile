@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    tools:context=".ui.welcome.WelcomeActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/heading_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/heading_title"
+            style="@style/HeadingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="@drawable/heading_bar"
+            android:paddingLeft="21dp"
+            android:paddingTop="27dp"
+            android:paddingBottom="27dp"
+            android:text="Profile Anda"
+            android:textColor="#000000" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/background"
+        android:scaleType="fitStart"
+        android:src="@drawable/background_top"
+        app:layout_constraintBottom_toTopOf="@+id/background_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/background_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.48" />
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/profile_detail_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/list_menu_bar"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:padding="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heading_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:elevation="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bottom_background"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+            <TextView
+                android:id="@+id/profile_name"
+                style="@style/DescriptionBlack14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="Gabriel Zebaoth Krisopras Putra"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/profile_email"
+                style="@style/DescriptionGrey12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:text="gabiiing13@gmail.com"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_edit_profile"
+                    style="@style/ButtonMain_Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/secondary"
+                    android:drawableLeft="@drawable/baseline_auto_delete_24"
+                    android:text="Edit Profile"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btn_change_photo"
+                    style="@style/ButtonSecondary_Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:drawableLeft="@drawable/baseline_auto_delete_24"
+                    android:text="Ganti Foto"
+                    android:textColor="@color/secondary" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_personal_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/list_menu_bar"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:padding="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_detail_card">
+
+        <TextView
+            style="@style/DescriptionBlack14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="10dp"
+            android:text="Informasi Akun"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+        <?xml version="1.0" encoding="utf-8"?>
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow>
+
+                <TextView
+                    style="@style/DescriptionBlack12"
+                    android:layout_gravity="left"
+                    android:padding="8dp"
+                    android:text="Nama"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/DescriptionBlack12"
+                    android:layout_gravity="left"
+                    android:gravity="right"
+
+                    android:padding="8dp"
+                    android:text="Gabriel Zebaoth Krisopras Putra" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/DescriptionBlack12"
+                    android:layout_gravity="left"
+                    android:padding="8dp"
+                    android:text="Email"
+
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/DescriptionBlack12"
+                    android:layout_gravity="left"
+                    android:gravity="right"
+                    android:padding="8dp"
+                    android:text="gabiiing13@gmail.com" />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_personal_card"
+        android:padding="18dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/list_menu_bar"
+        android:elevation="5dp">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/outline_vpn_key_24" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/icon"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:text="Ganti Password"
+            style="@style/DescriptionBlack14"
+            android:textColor="@android:color/black"
+            />
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
