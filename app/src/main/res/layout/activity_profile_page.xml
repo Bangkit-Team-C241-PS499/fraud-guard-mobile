@@ -128,7 +128,6 @@
         tools:layout_editor_absoluteX="15dp"
         tools:layout_editor_absoluteY="238dp" />
 
-    <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rl_list_riwayat_deteksi"
         android:layout_width="match_parent"
@@ -318,7 +317,7 @@
             android:layout_marginStart="16dp"
             android:text="Logout"
             style="@style/DescriptionBlack14"
-            android:textColor="@android:color/red"
+            android:textColor="@color/red"
             />
 
     </RelativeLayout>

@@ -145,10 +145,11 @@
         android:layout_height="40dp"
         android:layout_marginBottom="36dp"
         android:text="Login"
+        android:backgroundTint="@color/secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="+id/button_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/button_guideline"
         app:layout_constraintVertical_bias="0.105" />
 
 

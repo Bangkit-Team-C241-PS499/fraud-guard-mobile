@@ -34,9 +34,6 @@
             android:name=".ui.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.WelcomeActivty"
-            android:exported="false" />
-        <activity
             android:name=".ui.splashScreen.SplashActivity"
             android:exported="false"
             android:theme="@style/Theme.Fraudguard" />
