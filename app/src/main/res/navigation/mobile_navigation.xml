@@ -8,18 +8,27 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.bangkit.fraudguard.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        app:labelVisibilityMode="unlabeled"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.bangkit.fraudguard.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
+        android:id="@+id/navigation_profile"
+        android:name="com.bangkit.fraudguard.ui.profile.detailProfile.Profile"
+        app:labelVisibilityMode="unlabeled"
+        tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.bangkit.fraudguard.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_article"
+        android:name="com.bangkit.fraudguard.ui.article.ArticleFragment"
+        app:labelVisibilityMode="unlabeled"
+        tools:layout="@layout/fragment_article" />
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="com.bangkit.fraudguard.ui.history.HistoryFragment"
+        app:labelVisibilityMode="unlabeled"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/navigation_create"
+        android:name="com.bangkit.fraudguard.ui.create.CreateFragment"
+        app:labelVisibilityMode="unlabeled"
+        tools:layout="@layout/fragment_create" />
 </navigation>
