@@ -5,28 +5,28 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.welcome.WelcomeActivity">
-    <androidx.cardview.widget.CardView
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/heading_card"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/heading_title"
+            style="@style/HeadingTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/heading_bar"
             android:layout_margin="0dp"
+            android:background="@drawable/heading_bar"
+            android:paddingLeft="21dp"
             android:paddingTop="27dp"
             android:paddingBottom="27dp"
-            android:paddingLeft="21dp"
-            style="@style/HeadingTitle"
             android:text="Masuk"
             android:textColor="#000000" />
     </androidx.cardview.widget.CardView>
@@ -57,9 +57,9 @@
         android:layout_width="355dp"
         android:layout_height="55dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="29dp"
-
         android:layout_marginTop="12dp"
+
+        android:layout_marginRight="29dp"
         android:text="Silahkan masuk dengan email dan password-mu yang terdaftar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -72,39 +72,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="646dp" />
+        app:layout_constraintGuide_percent="0.14" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_email_text">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.bangkit.fraudguard.ui.customView.CustomEditText
+            android:id="@+id/inputLoginEmail"
+            style="@style/DescriptionBlack12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Masukkan email Anda" />
+            android:hint="Masukkan email Anda"
+            android:padding="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/login_email_text"
+        style="@style/DescriptionBlack12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
         android:layout_marginStart="18dp"
+        android:layout_marginTop="12dp"
+        android:text="Email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTitle" />
 
     <TextView
         android:id="@+id/login_password_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Password"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="18dp"
+        android:layout_marginTop="24dp"
+        android:text="Password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
@@ -113,16 +118,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:endIconMode="password_toggle"
+        app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toBottomOf="@+id/login_password_text">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputLoginPassword"
+            style="@style/DescriptionBlack12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan kata sandi Anda"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:padding="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -141,15 +149,32 @@
 
     <Button
         android:id="@+id/login_button"
+        style="@style/DescriptionBlack14"
         android:layout_width="235dp"
         android:layout_height="40dp"
         android:layout_marginBottom="36dp"
+        android:backgroundTint="@color/secondary"
+        android:enabled="false"
         android:text="Login"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="+id/button_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/button_guideline"
         app:layout_constraintVertical_bias="0.105" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/secondary"
+        android:progressTint="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heading_card" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,21 +2,325 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    android:backgroundTint="@color/white"
+    tools:context=".ui.welcome.WelcomeActivity">
 
-    <TextView
-        android:id="@+id/text_home"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/heading_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="0dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/heading_bar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/heading_title"
+            style="@style/HeadingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:paddingLeft="21dp"
+            android:paddingTop="27dp"
+            android:paddingBottom="27dp"
+            android:text="Profile Anda"
+            android:textColor="#000000" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/background"
+        android:scaleType="fitStart"
+        android:src="@drawable/background_top"
+        app:layout_constraintBottom_toTopOf="@+id/background_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/background_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.48" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/upper_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.12" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_list_detail_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/list_menu_bar"
+        android:elevation="5dp"
+        android:paddingLeft="18dp"
+        android:paddingTop="8dp"
+        android:paddingRight="18dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upper_guideline">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bottom_background"
+            app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+        <TextView
+            android:id="@+id/text"
+            style="@style/DescriptionBlack14_semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/icon"
+            android:text="Gabriel Zebaoth Krisopras Putra" />
+
+        <TextView
+            android:id="@+id/secondary_text"
+            style="@style/DescriptionGrey12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text"
+            android:layout_alignStart="@id/text"
+            android:layout_marginTop="4dp"
+            android:text="Gabiiing13@gmail.com" />
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </RelativeLayout>
+    <!--    riwayat deteksi-->
+
+    <TextView
+        android:id="@+id/tv_riwayat"
+        style="@style/DescriptionBlack12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="12dp"
+        android:text="Riwayat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_list_detail_user"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="238dp" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_list_riwayat_deteksi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_riwayat"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/list_menu_bar"
+        android:elevation="5dp">
+
+        <ImageView
+            android:id="@+id/icon_riwayat_deteksi"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/baseline_history_24" />
+
+        <TextView
+            android:id="@+id/text_riwayat_deteksi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/icon_riwayat_deteksi"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:text="Riwayat Deteksi"
+            style="@style/DescriptionBlack14"
+            android:textColor="@android:color/black"
+            />
+
+        <ImageView
+            android:id="@+id/arrow_riwayat_deteksi"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_list_hapus_deteksi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_list_riwayat_deteksi"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/list_menu_bar"
+        android:elevation="5dp">
+
+        <ImageView
+            android:id="@+id/icon_hapus_riwayat_deteksi"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/baseline_auto_delete_24" />
+
+        <TextView
+            android:id="@+id/text_hapus_riwayat_deteksi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/icon_hapus_riwayat_deteksi"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:text="Hapus Riwayat Deteksi"
+            style="@style/DescriptionBlack14"
+            android:textColor="@android:color/black"
+            />
+
+        <ImageView
+            android:id="@+id/arrow_hapus_riwayat_deteksi"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </RelativeLayout>
+
+
+
+
+    <!--    personalisasi akun-->
+    <TextView
+        android:id="@+id/tv_personalisasi"
+        style="@style/DescriptionBlack12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="12dp"
+        android:text="Personalisasi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_list_hapus_deteksi" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_list_ganti_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_personalisasi"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/list_menu_bar"
+        android:elevation="5dp">
+
+        <ImageView
+            android:id="@+id/icon_ganti_password"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/outline_vpn_key_24" />
+
+        <TextView
+            android:id="@+id/text_ganti_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/icon_ganti_password"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:text="Ganti Password"
+            style="@style/DescriptionBlack14"
+            android:textColor="@android:color/black"
+            />
+
+        <ImageView
+            android:id="@+id/arrow_ganti_password"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_list_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_list_ganti_password"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:backgroundTint="@color/red_10"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/list_menu_bar"
+        >
+
+        <ImageView
+            android:id="@+id/icon_logout"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/baseline_power_settings_new_24"
+            />
+
+        <TextView
+            android:id="@+id/text_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/icon_logout"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:text="Logout"
+            style="@style/DescriptionBlack14"
+            android:textColor="@color/red"
+            />
+
+    </RelativeLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

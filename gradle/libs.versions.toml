@@ -10,12 +10,20 @@ material = "1.12.0"
 constraintlayout = "2.1.4"
 lifecycleLivedataKtx = "2.8.1"
 lifecycleViewmodelKtx = "2.8.1"
+org-jetbrains-kotlin-android = "1.8.0"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
 activity = "1.8.0"
-ksp = "1.8.22-1.0.11"
-kotlin_parcelize = "1.8.0"
+ksp = "2.0.0-1.0.22"
+kotlinParcelize = "2.0.0"
 constraint-layout = "2.1.4"
+room = "2.5.1"
+datastore = "1.0.0"
+legacySupport = "1.0.0"
+datastoreCoreAndroid = "1.1.1"
+datastorePreferencesCoreJvm = "1.1.1"
+activity-ktx = "1.7.2"
+glide = "4.16.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -31,11 +39,23 @@ androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navi
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraint-layout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+androidx-legecy-support = { group = "androidx.legacy", name = "legacy-support-v4", version = "legecySupport" }
+androidx-datastore-core-android = { group = "androidx.datastore", name = "datastore-core-android", version.ref = "datastoreCoreAndroid" }
+androidx-datastore-preferences-core-jvm = { group = "androidx.datastore", name = "datastore-preferences-core-jvm", version.ref = "datastorePreferencesCoreJvm" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity-ktx" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version = "4.16.0" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version = "4.16.0" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version = "2.9.0" }
+retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version = "2.9.0" }
+okhttp3-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version = "4.11.0" }
+okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version = "4.11.0" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-parcelize = { id = "kotlin-parcelize", version.ref = "kotlin-parcelize" }
-
+devtoolsKsp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+parcelize = { id = "kotlin-parcelize", version.ref = "kotlin" }
+orgJetbrainsKotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 
