@@ -1,6 +1,7 @@
 package com.bangkit.fraudguard.ui.profile.editProfile
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -19,6 +20,7 @@ import com.bangkit.fraudguard.data.dto.response.ProfileResponse
 import com.bangkit.fraudguard.databinding.ActivityEditProfileBinding
 import com.bangkit.fraudguard.ui.customView.showCustomToast
 import com.bangkit.fraudguard.ui.main.MainViewModel
+import com.bangkit.fraudguard.ui.profile.editPassword.ChangePasswordActivity
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
@@ -93,8 +95,8 @@ class EditProfileActivity : AppCompatActivity() {
                         }
                         showLoading(false)
                         showCustomToast(this, "Nama berhasil diubah")
-
-
+                        Thread.sleep(2000)
+                        finish()
                     }
                 } else {
                     showLoading(false)
@@ -106,6 +108,11 @@ class EditProfileActivity : AppCompatActivity() {
 
         }
         binding.nameInput.addTextChangedListener(textWatcher)
+
+        binding.gantiPasswordButton.setOnClickListener {
+            val intent = Intent(this, ChangePasswordActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private val textWatcher = object : TextWatcher {

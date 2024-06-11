@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/white"
+    android:background="@color/white"
     tools:context=".ui.welcome.WelcomeActivity">
 
     <androidx.cardview.widget.CardView
@@ -51,7 +51,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.48" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/profile_detail_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,8 +74,9 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/profile_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="10dp"
                 android:layout_gravity="center"
                 android:elevation="10dp"
                 android:scaleType="centerCrop"
@@ -89,8 +90,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:textStyle="bold"
                 android:text="Gabriel Zebaoth Krisopras Putra"
-                android:textColor="@android:color/black"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <TextView
@@ -101,7 +103,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:text="gabiiing13@gmail.com"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/grey"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -118,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:backgroundTint="@color/secondary"
-                    android:drawableLeft="@drawable/baseline_auto_delete_24"
+                    android:drawableLeft="@drawable/baseline_edit_24"
                     android:text="Edit Profile"
                     android:textColor="@color/white" />
 
@@ -127,8 +129,9 @@
                     style="@style/ButtonSecondary_Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:drawableLeft="@drawable/baseline_auto_delete_24"
+                    android:backgroundTint="@color/broken_white"
+                    android:drawableLeft="@drawable/baseline_photo_camera_front_24"
+                    android:outlineAmbientShadowColor="@color/secondary"
                     android:text="Ganti Foto"
                     android:textColor="@color/secondary" />
             </LinearLayout>
@@ -178,6 +181,7 @@
                     android:id="@+id/tvDescriptionName"
                     style="@style/DescriptionBlack12"
                     android:layout_gravity="left"
+                    android:textColor="@color/grey"
 
                     android:padding="8dp"
                     android:text="Gabriel Zebaoth Krisopras Putra" />
@@ -194,6 +198,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:textColor="@color/grey"
                     android:id="@+id/tvDescriptionEmail"
                     style="@style/DescriptionBlack12"
                     android:layout_gravity="left"

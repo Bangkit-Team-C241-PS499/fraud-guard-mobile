@@ -70,6 +70,11 @@ class SpamRepository private constructor(
 
     }
 
+    fun deleteAllPrediction() : Call<ObjectResponse>{
+        return apiServiceSpam.deleteAllPredictions()
+
+    }
+
 
 
     companion object {

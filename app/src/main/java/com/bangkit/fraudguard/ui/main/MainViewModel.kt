@@ -29,9 +29,9 @@ class MainViewModel(
     }
 
     fun logout() {
-       runBlocking {
-              spamRepository.logout()
-       }
+        runBlocking {
+            spamRepository.logout()
+        }
     }
 
     fun saveSession(userModel: UserModel) {
@@ -40,11 +40,36 @@ class MainViewModel(
         }
     }
 
-    fun getHistory() : LiveData<Response<List<History>>> = liveData {
+    fun deleteAllPredictions(): LiveData<Response<ObjectResponse>> = liveData {
+        val responseLiveData = MutableLiveData<Response<ObjectResponse>>()
+
+        spamRepository.deleteAllPrediction().enqueue(object : Callback<ObjectResponse> {
+            override fun onResponse(
+                call: Call<ObjectResponse>,
+                response: Response<ObjectResponse>
+            ) {
+                responseLiveData.value = response
+            }
+
+            override fun onFailure(call: Call<ObjectResponse>, t: Throwable) {
+                // Handle failure
+                val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
+                val errorResponse = Response.error<ObjectResponse>(500, errorBody)
+                responseLiveData.value = errorResponse
+            }
+        })
+
+        emitSource(responseLiveData)
+    }
+
+    fun getHistory(): LiveData<Response<List<History>>> = liveData {
         val responseLiveData = MutableLiveData<Response<List<History>>>()
 
         spamRepository.getHistory().enqueue(object : Callback<List<History>> {
-            override fun onResponse(call: Call<List<History>>, response: Response<List<History>>) {
+            override fun onResponse(
+                call: Call<List<History>>,
+                response: Response<List<History>>
+            ) {
                 responseLiveData.value = response
             }
 
@@ -77,7 +102,6 @@ class MainViewModel(
 
 
 
-
     fun showProfile(): LiveData<Response<ProfileResponse>> = liveData {
         val responseLiveData = MutableLiveData<Response<ProfileResponse>>()
 
@@ -101,73 +125,76 @@ class MainViewModel(
     }
 
 
-    fun updateProfile(objectDTO : UpdateProfileRequest): LiveData<Response<ObjectResponse>> = liveData {
-        val responseLiveData = MutableLiveData<Response<ObjectResponse>>()
+    fun updateProfile(objectDTO: UpdateProfileRequest): LiveData<Response<ObjectResponse>> =
+        liveData {
+            val responseLiveData = MutableLiveData<Response<ObjectResponse>>()
 
-        spamRepository.updateProfile(objectDTO).enqueue(object : Callback<ObjectResponse> {
-            override fun onResponse(
-                call: Call<ObjectResponse>,
-                response: Response<ObjectResponse>
-            ) {
-                responseLiveData.value = response
-            }
+            spamRepository.updateProfile(objectDTO).enqueue(object : Callback<ObjectResponse> {
+                override fun onResponse(
+                    call: Call<ObjectResponse>,
+                    response: Response<ObjectResponse>
+                ) {
+                    responseLiveData.value = response
+                }
 
-            override fun onFailure(call: Call<ObjectResponse>, t: Throwable) {
-                // Handle failure
-                val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
-                val errorResponse = Response.error<ObjectResponse>(500, errorBody)
-                responseLiveData.value = errorResponse
-            }
-        })
+                override fun onFailure(call: Call<ObjectResponse>, t: Throwable) {
+                    // Handle failure
+                    val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
+                    val errorResponse = Response.error<ObjectResponse>(500, errorBody)
+                    responseLiveData.value = errorResponse
+                }
+            })
 
-        emitSource(responseLiveData)
-    }
+            emitSource(responseLiveData)
+        }
 
 
-    fun changePassword(objectDTO : ChangePasswordRequest): LiveData<Response<ObjectResponse>> = liveData {
-        val responseLiveData = MutableLiveData<Response<ObjectResponse>>()
+    fun changePassword(objectDTO: ChangePasswordRequest): LiveData<Response<ObjectResponse>> =
+        liveData {
+            val responseLiveData = MutableLiveData<Response<ObjectResponse>>()
 
-        spamRepository.changePassword(objectDTO).enqueue(object : Callback<ObjectResponse> {
-            override fun onResponse(
-                call: Call<ObjectResponse>,
-                response: Response<ObjectResponse>
-            ) {
-                responseLiveData.value = response
-            }
+            spamRepository.changePassword(objectDTO).enqueue(object : Callback<ObjectResponse> {
+                override fun onResponse(
+                    call: Call<ObjectResponse>,
+                    response: Response<ObjectResponse>
+                ) {
+                    responseLiveData.value = response
+                }
 
-            override fun onFailure(call: Call<ObjectResponse>, t: Throwable) {
-                // Handle failure
-                val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
-                val errorResponse = Response.error<ObjectResponse>(500, errorBody)
-                responseLiveData.value = errorResponse
-            }
-        })
+                override fun onFailure(call: Call<ObjectResponse>, t: Throwable) {
+                    // Handle failure
+                    val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
+                    val errorResponse = Response.error<ObjectResponse>(500, errorBody)
+                    responseLiveData.value = errorResponse
+                }
+            })
 
-        emitSource(responseLiveData)
-    }
+            emitSource(responseLiveData)
+        }
 
-    fun updateProfilePicture(photoFile : MultipartBody.Part): LiveData<Response<ChangePhotoResponse>> = liveData {
-        val responseLiveData = MutableLiveData<Response<ChangePhotoResponse>>()
+    fun updateProfilePicture(photoFile: MultipartBody.Part): LiveData<Response<ChangePhotoResponse>> =
+        liveData {
+            val responseLiveData = MutableLiveData<Response<ChangePhotoResponse>>()
 
-        spamRepository.updateProfilePicture(photoFile).enqueue(object : Callback<ChangePhotoResponse> {
-            override fun onResponse(
-                call: Call<ChangePhotoResponse>,
-                response: Response<ChangePhotoResponse>
-            ) {
-                responseLiveData.value = response
-            }
+            spamRepository.updateProfilePicture(photoFile)
+                .enqueue(object : Callback<ChangePhotoResponse> {
+                    override fun onResponse(
+                        call: Call<ChangePhotoResponse>,
+                        response: Response<ChangePhotoResponse>
+                    ) {
+                        responseLiveData.value = response
+                    }
 
-            override fun onFailure(call: Call<ChangePhotoResponse>, t: Throwable) {
-                // Handle failure
-                val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
-                val errorResponse = Response.error<ChangePhotoResponse>(500, errorBody)
-                responseLiveData.value = errorResponse
-            }
-        })
+                    override fun onFailure(call: Call<ChangePhotoResponse>, t: Throwable) {
+                        // Handle failure
+                        val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
+                        val errorResponse = Response.error<ChangePhotoResponse>(500, errorBody)
+                        responseLiveData.value = errorResponse
+                    }
+                })
 
-        emitSource(responseLiveData)
-    }
-
+            emitSource(responseLiveData)
+        }
 
 
 
