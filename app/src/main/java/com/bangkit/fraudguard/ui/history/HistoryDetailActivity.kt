@@ -61,7 +61,6 @@ class HistoryDetailActivity : AppCompatActivity() {
                         binding.textDescTop.text = "Non-Spam"
                         binding.textDescTop.setTextColor(Color.parseColor("#3FC464"))
 
-
                     }
                 }
             }
