@@ -10,7 +10,7 @@ data class History(
 	val createdAt: String? = null,
 	val deletedAt: String? = null,
 	val userId: Int? = null,
-	val id: Int? = null,
+	val id: String? = null,
 	val label: String? = null,
 	val message: String? = null,
 	val timestamp: String? = null,
