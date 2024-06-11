@@ -1,6 +1,7 @@
 package com.bangkit.fraudguard.ui.customView
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.TextView
 import android.widget.Toast
@@ -14,6 +15,8 @@ fun showCustomToast(context: Context, message: String, duration: Int = Toast.LEN
     text.text = message
 
     val toast = Toast(context)
+    toast.setGravity(Gravity.TOP, 0, 100) // Set Gravity.TOP
+
     toast.duration = duration
     toast.view = layout
     toast.show()

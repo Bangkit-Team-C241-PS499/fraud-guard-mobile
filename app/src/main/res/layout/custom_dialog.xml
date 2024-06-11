@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_shape"
+    android:elevation="8dp"
+    android:layout_margin="12dp"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/dialog_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:src="@drawable/icon_splash" />
+
+    <TextView
+        android:id="@+id/dialog_title"
+        style="@style/DescriptionBlack18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:text="Custom Title"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialog_message"
+        style="@style/DescriptionBlack14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+
+        android:paddingBottom="8dp"
+        android:text="This is a custom message." />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_negative_button"
+            style="@style/DescriptionBlack12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/secondary_button_background_color"
+            android:text="Cancel"
+            android:textColor="@color/secondary_button_text_selector" />
+
+        <Space
+            android:layout_width="16dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/dialog_positive_button"
+            style="@style/DescriptionBlack12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/main_button_backgroud_selector"
+            android:text="OK"
+            android:textColor="@color/main_button_text_color_selector" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
