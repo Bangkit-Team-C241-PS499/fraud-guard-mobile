@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.fraudguard.data.injection.Injection
 import com.bangkit.fraudguard.data.repository.AuthRepository
 import com.bangkit.fraudguard.data.repository.SpamRepository
+import com.bangkit.fraudguard.ui.login.LoginViewModel
 import com.bangkit.fraudguard.ui.main.MainViewModel
 import com.bangkit.fraudguard.ui.register.RegisterViewModel
 
@@ -29,15 +30,9 @@ class ViewModelFactory private constructor(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> RegisterViewModel(
-                authRepository
-            ) as T
-
+            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> RegisterViewModel(authRepository, spamRepository) as T
             modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel(spamRepository) as T
-            
-
-
-
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(authRepository, spamRepository) as T
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
 
         }

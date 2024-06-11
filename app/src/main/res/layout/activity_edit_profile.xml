@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:backgroundTint="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
     tools:context=".ui.welcome.WelcomeActivity">
 
     <androidx.cardview.widget.CardView
@@ -83,7 +83,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_name_text">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.bangkit.fraudguard.ui.customView.CustomEditText
+            android:id="@+id/name_input"
             style="@style/DescriptionBlack12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -124,6 +125,7 @@
         app:layout_constraintTop_toBottomOf="@+id/register_email_text">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_input"
             style="@style/DescriptionBlack12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -147,47 +149,46 @@
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ganti_password_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingin_ubah_password"
-        android:padding="18dp"
-        android:layout_marginTop="12dp"
         android:layout_marginStart="18dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="18dp"
         android:background="@drawable/list_menu_bar"
-        android:elevation="5dp">
+        android:elevation="5dp"
+        android:padding="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ingin_ubah_password">
 
         <ImageView
             android:id="@+id/icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:src="@drawable/outline_vpn_key_24" />
 
         <TextView
             android:id="@+id/text"
+            style="@style/DescriptionBlack14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/icon"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/icon"
             android:text="Ganti Password"
-            style="@style/DescriptionBlack14"
-            android:textColor="@android:color/black"
-           />
+            android:textColor="@android:color/black" />
 
         <ImageView
             android:id="@+id/arrow"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:src="@drawable/baseline_arrow_forward_ios_24" />
 
     </RelativeLayout>
-
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -202,22 +203,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="128dp" />
+        app:layout_constraintGuide_end="115dp" />
 
     <Button
         android:id="@+id/edit_profile_button"
+        style="@style/ButtonMain"
         android:layout_width="235dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
-        android:text="Ubah"
+        android:backgroundTint="@color/main_button_backgroud_selector"
         android:elevation="10dp"
-        style="@style/ButtonMain"
-        android:backgroundTint="@color/secondary"
+        android:text="Ubah"
+        android:textColor="@color/main_button_text_color_selector"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_guideline"
         app:layout_constraintVertical_bias="0.105" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/secondary"
+        android:progressTint="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/edit_profile_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

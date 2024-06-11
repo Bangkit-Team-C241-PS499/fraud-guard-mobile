@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.devtoolsKsp)
+    alias(libs.plugins.orgJetbrainsKotlinKapt)
 }
 
 android {
@@ -61,6 +62,8 @@ dependencies {
     implementation(libs.androidx.datastore.preferences) // androidx.datastore:datastore-preferences:1.0.0
     implementation(libs.androidx.activity.ktx)
     implementation(libs.glide)
+    kapt(libs.glide.compiler)
+
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp3.logging)

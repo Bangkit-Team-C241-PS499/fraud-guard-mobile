@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
+        android:networkSecurityConfig="@xml/network_config"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,10 +17,10 @@
             android:name=".ui.profile.profilePage.profilePageActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.detailProfile.detailProfileActivity"
+            android:name=".ui.profile.detailProfile.DetailProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.editProfile.editProfileActivity"
+            android:name=".ui.profile.editProfile.EditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ui.profile.editPassword.ChangePasswordActivity"
