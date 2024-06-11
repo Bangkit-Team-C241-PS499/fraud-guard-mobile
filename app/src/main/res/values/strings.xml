@@ -54,4 +54,10 @@
     <string name="title_create">Deteksi Spam</string>
     <string name="title_history">Riwayat</string>
     <string name="title_profile">Profil</string>
+    <string name="invalid_email">Mohon massukan email yang valid</string>
+    <string name="invalid_password">Password harus terdiri dari minimal 8 karakter\n</string>
+    <string name="invalid_name">Mohon masukan nama lengkap Anda\n</string>
+    <string name="failed_login_text">Gagal login !\n</string>
+    <string name="failed_register_text">Gagal registrasi !</string>
+    <string name="password_mismatch">Kombinasi password baru tidak sama\n</string>
 </resources>

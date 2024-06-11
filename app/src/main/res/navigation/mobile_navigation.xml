@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.bangkit.fraudguard.ui.profile.detailProfile.Profile"
+        android:name="com.bangkit.fraudguard.ui.profile.profilePage.Profile"
         app:labelVisibilityMode="unlabeled"
         tools:layout="@layout/fragment_profile" />
     <fragment

@@ -1,4 +1,4 @@
-package com.bangkit.fraudguard.ui.profile.editPassword
+package com.bangkit.fraudguard.ui.profile.editProfile
 
 import android.content.Context
 import android.os.Build
@@ -10,24 +10,27 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.fraudguard.R
-import com.bangkit.fraudguard.data.dto.request.ChangePasswordRequest
+import com.bangkit.fraudguard.data.dto.request.UpdateProfileRequest
 import com.bangkit.fraudguard.data.dto.response.ObjectResponse
-import com.bangkit.fraudguard.databinding.ActivityChangePasswordBinding
+import com.bangkit.fraudguard.data.dto.response.ProfileResponse
+import com.bangkit.fraudguard.databinding.ActivityEditProfileBinding
 import com.bangkit.fraudguard.ui.customView.showCustomToast
 import com.bangkit.fraudguard.ui.main.MainViewModel
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
+import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 import retrofit2.Response
 
 
-class ChangePasswordActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityChangePasswordBinding
+class EditProfileActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityEditProfileBinding
     private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityChangePasswordBinding.inflate(layoutInflater)
+        binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupViewModel()
         observeViewModel()
@@ -37,6 +40,24 @@ class ChangePasswordActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
+        showLoading(true)
+        viewModel.showProfile().observe(this, Observer { response ->
+            try {
+                if (response.isSuccessful) {
+                    showLoading(false)
+                    val profile: ProfileResponse? = response.body()
+                    binding.nameInput.setText(profile?.name)
+                    binding.emailInput.setText(profile?.email)
+                } else {
+                    showLoading(false)
+                    showCustomToast(this, "Tidak bisa menampilkan profile")
+                }
+            } catch (e: Exception) {
+                showLoading(false)
+                showCustomToast(this, e.message.toString())
+            }
+        })
+
 
     }
 
@@ -57,20 +78,21 @@ class ChangePasswordActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.changePasswordButton.setOnClickListener {
-            val oldPassword = binding.oldPassword.text.toString()
-            val newPasswrod = binding.newPassword.text.toString()
-            val confirmPassword = binding.confirmPassword.text.toString()
-
-            val requestDTO = ChangePasswordRequest(oldPassword, newPasswrod, confirmPassword)
+        binding.editProfileButton.setOnClickListener {
+            val name = binding.nameInput.text.toString()
+            val requestDTO = UpdateProfileRequest(name)
             showLoading(true)
-            viewModel.changePassword(requestDTO).observe(this) { response ->
+            viewModel.updateProfile(requestDTO).observe(this) { response ->
                 if (response.isSuccessful) {
                     val body = response.body()
                     if (body != null) {
                         var userModel = viewModel.getSession().value
+                        viewModel.getSession().value?.let { userModel ->
+                            userModel.name = name
+                            runBlocking { viewModel.saveSession(userModel) }
+                        }
                         showLoading(false)
-                        showCustomToast(this, "Password berhasil diubah")
+                        showCustomToast(this, "Nama berhasil diubah")
 
 
                     }
@@ -83,9 +105,7 @@ class ChangePasswordActivity : AppCompatActivity() {
             }
 
         }
-        binding.oldPassword.addTextChangedListener(textWatcher)
-        binding.newPassword.addTextChangedListener(textWatcher)
-        binding.confirmPassword.addTextChangedListener(textWatcher)
+        binding.nameInput.addTextChangedListener(textWatcher)
     }
 
     private val textWatcher = object : TextWatcher {
@@ -98,11 +118,9 @@ class ChangePasswordActivity : AppCompatActivity() {
     }
 
     private fun setMyButtonEnable() {
-        val oldPasswordValid = binding.oldPassword.text.toString().isNotEmpty()
-        val newPasswordValid = binding.newPassword.text.toString().isNotEmpty()
-        val confirmPasswordValid = binding.confirmPassword.text.toString().isNotEmpty()
+        val nameValid = binding.nameInput.text.toString().isNotEmpty()
 
-        binding.changePasswordButton.isEnabled = oldPasswordValid && newPasswordValid && confirmPasswordValid
+        binding.editProfileButton.isEnabled = nameValid
     }
 
     private fun showLoading(isLoading: Boolean) {

@@ -38,9 +38,17 @@ fun getApiServiceSpam(token: String): ApiServiceSpam {
 
 
 fun getApiServiceAuth(): ApiServiceAuth {
+    val logging = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+
+    val client = OkHttpClient.Builder()
+        .addInterceptor(logging)
+        .build()
 
     val retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.BASE_URL)
+        .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
