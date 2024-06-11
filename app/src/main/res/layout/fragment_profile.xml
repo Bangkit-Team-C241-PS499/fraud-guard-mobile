@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/white"
+    android:background="@color/white"
     tools:context=".ui.welcome.WelcomeActivity">
 
     <androidx.cardview.widget.CardView
@@ -79,7 +79,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:elevation="10dp"
             android:scaleType="centerCrop"
             android:src="@drawable/bottom_background"
             app:shapeAppearanceOverlay="@style/roundedImageView" />
@@ -291,8 +290,8 @@
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
         android:paddingLeft="18dp"
+        android:elevation="5dp"
         android:paddingRight="18dp"
-        android:backgroundTint="@color/red_10"
         android:layout_marginTop="12dp"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
@@ -317,8 +316,15 @@
             android:layout_marginStart="16dp"
             android:text="Logout"
             style="@style/DescriptionBlack14"
-            android:textColor="@color/red"
+            android:textColor="@color/black"
             />
+        <ImageView
+            android:id="@+id/arrow_logout"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
 
     </RelativeLayout>
 

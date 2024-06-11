@@ -5,14 +5,13 @@ import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.bangkit.fraudguard.R
 
 class CustomEditText @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : AppCompatEditText(context, attrs, defStyleAttr) {
+context: Context, attrs: AttributeSet? = null
+) : AppCompatEditText(context, attrs) {
 
     private var clearButtonImage: Drawable =
         ContextCompat.getDrawable(context, R.drawable.baseline_close_24) as Drawable
@@ -51,17 +50,6 @@ class CustomEditText @JvmOverloads constructor(
             "password" -> {
                 if (input.length < 8) {
                     setError(context.getString(R.string.invalid_password), null)
-                }
-            }
-
-            "confirm_password" -> {
-                // Membandingkan input dengan newPassword
-                val parent = parent as ViewGroup
-                val newPasswordEditText = parent.findViewWithTag<CustomEditText>("new_password")
-                val newPassword = newPasswordEditText.text.toString()
-
-                if (newPassword != input) {
-                    setError(context.getString(R.string.password_mismatch), null)
                 }
             }
 

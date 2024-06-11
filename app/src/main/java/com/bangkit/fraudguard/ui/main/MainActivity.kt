@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             )
         )
         navView.setupWithNavController(navController)
+        val fragmentToOpen = intent.getStringExtra("fragmentToOpen")
+        if (fragmentToOpen == "history") {
+            navController.navigate(R.id.navigation_history)
+        }
         setupViewModel()
         checkUserSession()
 

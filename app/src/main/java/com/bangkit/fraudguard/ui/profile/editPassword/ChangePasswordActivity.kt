@@ -1,6 +1,7 @@
 package com.bangkit.fraudguard.ui.profile.editPassword
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -18,6 +19,7 @@ import com.bangkit.fraudguard.databinding.ActivityChangePasswordBinding
 import com.bangkit.fraudguard.ui.customView.showCustomToast
 import com.bangkit.fraudguard.ui.main.MainViewModel
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
+import com.bangkit.fraudguard.ui.welcome.WelcomeActivity
 import org.json.JSONObject
 import retrofit2.Response
 
@@ -30,12 +32,21 @@ class ChangePasswordActivity : AppCompatActivity() {
         binding = ActivityChangePasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupViewModel()
+        checkUserSession()
         observeViewModel()
 
         setupView()
         setupAction()
     }
 
+    private fun checkUserSession() {
+        viewModel.getSession().observe(this) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(this, WelcomeActivity::class.java))
+                finish()
+            }
+        }
+    }
     private fun observeViewModel() {
 
     }

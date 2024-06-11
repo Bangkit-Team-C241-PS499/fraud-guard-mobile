@@ -17,7 +17,8 @@ import com.bangkit.fraudguard.data.dto.request.LoginRequest
 import com.bangkit.fraudguard.data.dto.response.AuthResponse
 import com.bangkit.fraudguard.data.model.UserModel
 import com.bangkit.fraudguard.databinding.ActivityLoginBinding
-import com.bangkit.fraudguard.ui.alert.showAlert
+import com.bangkit.fraudguard.ui.customView.showCustomAlertDialog
+import com.bangkit.fraudguard.ui.customView.showCustomToast
 import com.bangkit.fraudguard.ui.main.MainActivity
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import kotlinx.coroutines.runBlocking
@@ -31,8 +32,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupViewModel()
         setupView()
+        setupViewModel()
         setupAction()
     }
 
@@ -71,33 +72,24 @@ class LoginActivity : AppCompatActivity() {
                         )
                         runBlocking { viewModel.saveSession(userModel) }
                         showLoading(false)
-                        showAlert(
-                            context = this,  // atau requireContext() jika di dalam Fragment
-                            title = "Login berhasil",
-                            message = "Selamat datang kembali, ${body.name}!",
-                            positiveText = "Lanjut",
-                            negativeText = "Ganti Akun",
-                            positiveAction = {
-                                goToMainActivity(this)
-                            },
-                            negativeAction = {
-                                goToLoginActivity(this)
-                            }
-                        )
+                        showCustomToast(this, "Login sebagai: \n" +
+                                " ${body.name}")
+                        goToMainActivity(this)
+
+
 
                     }
                 } else {
                     showLoading(false)
-                    showAlert(
-                        context = this,  // atau requireContext() jika di dalam Fragment
+                    showCustomAlertDialog(
                         title = "Login gagal",
                         message = extractErrorMessage(response),
-                        positiveText = "Coba lagi",
-                        positiveAction = {
+                        positiveButtonText  = "Coba lagi",
+                        onPositiveButtonClick  = {
                             // do nothing
                         },
-                        negativeText = "Batal",
-                        negativeAction = {
+                        negativeButtonText = "Batal",
+                        onNegativeButtonClick = {
                             // do nothing
                         }
                     )

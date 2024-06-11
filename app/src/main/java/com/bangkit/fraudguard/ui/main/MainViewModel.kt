@@ -38,6 +38,28 @@ class MainViewModel(
         }
     }
 
+    fun deleteAllPredictions(): LiveData<Response<ObjectResponse>> = liveData {
+        val responseLiveData = MutableLiveData<Response<ObjectResponse>>()
+
+        spamRepository.deleteAllPrediction().enqueue(object : Callback<ObjectResponse> {
+            override fun onResponse(
+                call: Call<ObjectResponse>,
+                response: Response<ObjectResponse>
+            ) {
+                responseLiveData.value = response
+            }
+
+            override fun onFailure(call: Call<ObjectResponse>, t: Throwable) {
+                // Handle failure
+                val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
+                val errorResponse = Response.error<ObjectResponse>(500, errorBody)
+                responseLiveData.value = errorResponse
+            }
+        })
+
+        emitSource(responseLiveData)
+    }
+
 
 
     fun showProfile(): LiveData<Response<ProfileResponse>> = liveData {

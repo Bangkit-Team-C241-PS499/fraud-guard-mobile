@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.welcome.WelcomeActivity">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/heading_card"
         android:layout_width="match_parent"
@@ -14,8 +15,7 @@
         android:layout_margin="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/heading_title"
@@ -57,9 +57,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="29dp"
-
         android:layout_marginTop="12dp"
+
+        android:layout_marginRight="29dp"
         android:text="Lengkapi data dirimu dibawah ini ya!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -76,43 +76,43 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_input_layout"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_name_text">
 
         <com.bangkit.fraudguard.ui.customView.CustomEditText
             android:id="@+id/inputNameRegister"
+            style="@style/DescriptionBlack12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:inputType="name"
-            android:padding="12dp"
+            android:hint="Masukkan nama lengkap Anda"
             android:inputType="text"
-            style="@style/DescriptionBlack12"
-            android:hint="Masukkan nama lengkap Anda" />
+            android:padding="12dp"
+            app:inputType="name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/register_name_text"
+        style="@style/DescriptionBlack12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nama Lengkap"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="18dp"
-        style="@style/DescriptionBlack12"
+        android:layout_marginTop="24dp"
+        android:text="Nama Lengkap"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTitle" />
 
     <TextView
         android:id="@+id/register_email_text"
+        style="@style/DescriptionBlack12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email"
-        style="@style/DescriptionBlack12"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="18dp"
+        android:layout_marginTop="24dp"
+        android:text="Email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_input_layout" />
 
@@ -122,88 +122,90 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_email_text">
 
         <com.bangkit.fraudguard.ui.customView.CustomEditText
             android:id="@+id/inputEmailRegister"
+            style="@style/DescriptionBlack12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-android:padding="12dp"
 
             android:hint="Masukkan email Anda"
-            style="@style/DescriptionBlack12"
-            app:inputType="email"
-            android:inputType="text" />
+            android:inputType="text"
+            android:padding="12dp"
+            app:inputType="email" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <TextView
         android:id="@+id/register_password_text"
+        style="@style/DescriptionBlack12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        style="@style/DescriptionBlack12"
 
         android:text="Password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_input_layout" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        app:endIconMode="password_toggle"
         android:layout_marginEnd="18dp"
+        app:endIconMode="password_toggle"
 
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_password_text">
 
         <com.bangkit.fraudguard.ui.customView.CustomEditText
             android:id="@+id/inputPasswordRegister"
+            style="@style/DescriptionBlack12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/DescriptionBlack12"
-            app:inputType="password"
-            android:padding="12dp"
             android:hint="Masukkan password Anda"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:padding="12dp"
+            app:inputType="password" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/register_confirm_password_text"
+        style="@style/DescriptionBlack12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="Konfirmasi Password"
-        style="@style/DescriptionBlack12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_input_layout" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/confirm_password_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        app:endIconMode="password_toggle"
         android:layout_marginEnd="18dp"
+        app:endIconMode="password_toggle"
 
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_confirm_password_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputConfirmPasswordRegister"
+            style="@style/DescriptionBlack12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan kembali password Anda"
-            style="@style/DescriptionBlack12"
+            android:inputType="textPassword"
             android:padding="12dp"
-            app:inputType="textPassword"
-            android:inputType="textPassword" />
+            app:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -226,9 +228,9 @@ android:padding="12dp"
         android:layout_width="235dp"
         android:layout_height="40dp"
         android:layout_marginBottom="36dp"
-        android:text="Daftar"
-        android:enabled="false"
         android:backgroundTint="@color/main_button_backgroud_selector"
+        android:enabled="false"
+        android:text="Daftar"
         android:textColor="@color/main_button_text_color_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -236,18 +238,27 @@ android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@+id/button_guideline"
         app:layout_constraintVertical_bias="0.105" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
+    <RelativeLayout
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:progressTint="@color/white"
-        android:indeterminateTint="@color/secondary"
-        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        android:layout_margin="0dp"
+        android:background="@drawable/list_menu_bar"
+        android:backgroundTint="@color/broken_white"
+        android:elevation="10dp"
+        android:visibility="gone"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirm_password_input_layout" />
+        app:layout_constraintTop_toTopOf="parent">
 
-
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/secondary"
+            android:padding="10dp"
+            android:progressTint="@color/white"
+            android:visibility="visible" />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

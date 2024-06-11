@@ -17,7 +17,8 @@ import com.bangkit.fraudguard.data.dto.request.RegisterRequest
 import com.bangkit.fraudguard.data.dto.response.AuthResponse
 import com.bangkit.fraudguard.data.model.UserModel
 import com.bangkit.fraudguard.databinding.ActivityRegisterBinding
-import com.bangkit.fraudguard.ui.alert.showAlert
+import com.bangkit.fraudguard.ui.customView.showCustomAlertDialog
+import com.bangkit.fraudguard.ui.customView.showCustomToast
 import com.bangkit.fraudguard.ui.main.MainActivity
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import kotlinx.coroutines.runBlocking
@@ -73,35 +74,25 @@ class RegisterActivity : AppCompatActivity() {
                         )
                         runBlocking { viewModel.saveSession(userModel) }
                         showLoading(false)
-                        showAlert(
-                            context = this,  // atau requireContext() jika di dalam Fragment
-                            title = "Register berhasil",
-                            message = "Selamat datang , ${body.name}!",
-                            positiveText = "Lanjut",
-                            negativeText = "Kembali",
-                            positiveAction = {
-                                goToMainActivity(this)
-                            },
-                            negativeAction = {
-                                runBlocking { viewModel.logout() }
-                                finish()
-                            }
+                        showCustomToast(
+                            this, "Login sebagai: \n" +
+                                    " ${body.name}"
                         )
+                        goToMainActivity(this)
+
 
                     }
                 } else {
                     showLoading(false)
-                    showAlert(
-                        context = this,  // atau requireContext() jika di dalam Fragment
+                    showCustomAlertDialog(
                         title = "Register gagal",
                         message = extractErrorMessage(response),
-                        positiveText = "Coba lagi",
-                        positiveAction = {
+                        positiveButtonText = "Coba lagi",
+                        onPositiveButtonClick = {
                             // do nothing
                         },
-                        negativeText = "Batal",
-                        negativeAction = {
-                            // do nothing
+                        negativeButtonText = "Batal",
+                        onNegativeButtonClick = {
                         }
                     )
 
@@ -126,10 +117,15 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setMyButtonEnable() {
         val nameValid = binding.inputNameRegister.text.toString().isNotEmpty()
-        val emailValid = android.util.Patterns.EMAIL_ADDRESS.matcher(binding.inputEmailRegister.text.toString()).matches()
+        val emailValid =
+            android.util.Patterns.EMAIL_ADDRESS.matcher(binding.inputEmailRegister.text.toString())
+                .matches()
         val passwordValid = binding.inputPasswordRegister.text.toString().length >= 8
-        val confirmPasswordValid = binding.inputConfirmPasswordRegister.text.toString() == binding.inputPasswordRegister.text.toString() && binding.inputConfirmPasswordRegister.text.toString().isNotEmpty()
-        binding.registerButton.isEnabled = nameValid && emailValid && passwordValid && confirmPasswordValid
+        val confirmPasswordValid =
+            binding.inputConfirmPasswordRegister.text.toString() == binding.inputPasswordRegister.text.toString() && binding.inputConfirmPasswordRegister.text.toString()
+                .isNotEmpty()
+        binding.registerButton.isEnabled =
+            nameValid && emailValid && passwordValid && confirmPasswordValid
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -138,7 +134,10 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setupViewModel() {
         viewModel =
-            ViewModelProvider(this, ViewModelFactory.getInstance(this))[RegisterViewModel::class.java]
+            ViewModelProvider(
+                this,
+                ViewModelFactory.getInstance(this)
+            )[RegisterViewModel::class.java]
     }
 
     fun goToMainActivity(context: Context) {

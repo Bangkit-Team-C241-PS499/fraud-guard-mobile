@@ -8,7 +8,9 @@ import com.bangkit.fraudguard.data.dto.response.ProfileResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
@@ -24,8 +26,11 @@ interface ApiServiceSpam {
     @PUT("user/change-password")
     fun changePassword(@Body dto: ChangePasswordRequest): Call<ObjectResponse>
 
+    @Multipart
     @POST("user/profile/picture")
     fun updateProfilePicture(@Part file: MultipartBody.Part): Call<ChangePhotoResponse>
 
+    @DELETE("predictions/")
+    fun deleteAllPredictions(): Call<ObjectResponse>
 
 }
