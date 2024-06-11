@@ -8,6 +8,7 @@ import androidx.lifecycle.liveData
 import com.bangkit.fraudguard.data.dto.request.ChangePasswordRequest
 import com.bangkit.fraudguard.data.dto.request.UpdateProfileRequest
 import com.bangkit.fraudguard.data.dto.response.ChangePhotoResponse
+import com.bangkit.fraudguard.data.dto.response.History
 import com.bangkit.fraudguard.data.dto.response.ObjectResponse
 import com.bangkit.fraudguard.data.dto.response.ProfileResponse
 import com.bangkit.fraudguard.data.model.UserModel
@@ -58,6 +59,22 @@ class MainViewModel(
         })
 
         emitSource(responseLiveData)
+    fun getHistory() : LiveData<Response<List<History>>> = liveData {
+        val responseLiveData = MutableLiveData<Response<List<History>>>()
+
+        spamRepository.getHistory().enqueue(object : Callback<List<History>> {
+            override fun onResponse(call: Call<List<History>>, response: Response<List<History>>) {
+                responseLiveData.value = response
+            }
+
+            override fun onFailure(call: Call<List<History>>, t: Throwable) {
+                val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
+                val errorResponse = Response.error<List<History>>(500, errorBody)
+                responseLiveData.value = errorResponse
+            }
+        })
+        emitSource(responseLiveData)
+
     }
 
 
@@ -151,5 +168,8 @@ class MainViewModel(
 
         emitSource(responseLiveData)
     }
+
+
+
 
 }

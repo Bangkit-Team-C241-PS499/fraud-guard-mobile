@@ -3,6 +3,8 @@ package com.bangkit.fraudguard.data.config
 import com.bangkit.fraudguard.data.dto.request.ChangePasswordRequest
 import com.bangkit.fraudguard.data.dto.request.UpdateProfileRequest
 import com.bangkit.fraudguard.data.dto.response.ChangePhotoResponse
+import com.bangkit.fraudguard.data.dto.response.History
+import com.bangkit.fraudguard.data.dto.response.HistoryResponse
 import com.bangkit.fraudguard.data.dto.response.ObjectResponse
 import com.bangkit.fraudguard.data.dto.response.ProfileResponse
 import okhttp3.MultipartBody
@@ -32,5 +34,9 @@ interface ApiServiceSpam {
 
     @DELETE("predictions/")
     fun deleteAllPredictions(): Call<ObjectResponse>
+  
+    @GET("predictions/history")
+    fun getHistory(): Call<List<History>>
+
 
 }
