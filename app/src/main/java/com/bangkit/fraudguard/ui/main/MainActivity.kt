@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
-    private lateinit var rvHistory: RecyclerView
     companion object {
         private const val TAG = "MainActivity"
     }
@@ -37,11 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val layoutManager = LinearLayoutManager(this)
-        rvHistory = findViewById(R.id.rv_history)
-        rvHistory.layoutManager = layoutManager
-        val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
-        rvHistory.addItemDecoration(itemDecoration)
+
         setupViewModel()
         checkUserSession()
         val navView: BottomNavigationView = binding.navView

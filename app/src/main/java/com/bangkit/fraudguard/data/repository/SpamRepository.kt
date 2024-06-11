@@ -51,6 +51,10 @@ class SpamRepository private constructor(
         return apiServiceSpam.getHistory()
     }
 
+    fun historyDetail(id:String): Call<History>{
+        return apiServiceSpam.getDetailHistory(id)
+    }
+
     fun updateProfile(objectDTO : UpdateProfileRequest) : Call<ObjectResponse>{
         return apiServiceSpam.updateProfile(objectDTO)
 
