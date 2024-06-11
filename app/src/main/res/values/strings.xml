@@ -54,4 +54,7 @@
     <string name="title_create">Deteksi Spam</string>
     <string name="title_history">Riwayat</string>
     <string name="title_profile">Profil</string>
+    <string name="artikel_untuk_anda">Artikel Untuk Anda</string>
+    <string name="artikel_terbaru">Artikel Terbaru</string>
+    <string name="halo_gabriel">Halo, Gabriel</string>
 </resources>

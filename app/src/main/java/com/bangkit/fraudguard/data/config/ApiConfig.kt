@@ -1,4 +1,4 @@
-package com.bangkit.fraudguard.data.config
+ package com.bangkit.fraudguard.data.config
 
 import com.bangkit.fraudguard.BuildConfig
 import com.bangkit.fraudguard.BuildConfig.BASE_URL

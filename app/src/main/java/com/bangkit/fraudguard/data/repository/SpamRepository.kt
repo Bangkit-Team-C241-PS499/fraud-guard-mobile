@@ -1,8 +1,8 @@
 package com.bangkit.fraudguard.data.repository
 
 
-import com.bangkit.fraudguard.data.config.ApiService
-import com.bangkit.fraudguard.data.config.getApiService
+import com.bangkit.fraudguard.data.config.ApiServiceSpam
+import com.bangkit.fraudguard.data.config.getApiServiceSpam
 import com.bangkit.fraudguard.data.model.UserModel
 import com.bangkit.fraudguard.data.preferences.UserPreference
 import kotlinx.coroutines.flow.Flow
@@ -12,12 +12,12 @@ import kotlinx.coroutines.runBlocking
 class SpamRepository private constructor(
     private val userPreference: UserPreference,
 ) {
-    private lateinit var apiService: ApiService
+    private lateinit var apiService: ApiServiceSpam
 
     fun getSession(): Flow<UserModel> {
         var session = userPreference.getSession()
         runBlocking {
-            apiService = getApiService(session.first().token)
+            apiService = getApiServiceSpam(session.first().token)
         }
         return session
     }
@@ -26,7 +26,7 @@ class SpamRepository private constructor(
         runBlocking {
             userPreference.saveSession(user)
         }
-        apiService = getApiService(user.token)
+        apiService = getApiServiceSpam(user.token)
 
     }
 

@@ -60,7 +60,7 @@ dependencies {
     implementation(libs.androidx.activity) // androidx.activity:activity-ktx:1.7.2
     implementation(libs.androidx.datastore.preferences) // androidx.datastore:datastore-preferences:1.0.0
     implementation(libs.androidx.activity.ktx)
-    implementation(libs.glide)
+    //implementation(libs.glide)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp3.logging)
