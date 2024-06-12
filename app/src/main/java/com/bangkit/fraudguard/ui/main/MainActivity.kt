@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,11 +56,26 @@ class MainActivity : AppCompatActivity() {
         val fragmentToOpen = intent.getStringExtra("fragmentToOpen")
         if (fragmentToOpen == "history") {
             navController.navigate(R.id.navigation_history)
+            navView.setOnNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.navigation_home -> {
+                        if (navController.currentDestination?.id == R.id.navigation_history) {
+                            navController.popBackStack()
+                        } else {
+                            navController.navigate(R.id.navigation_home)
+                        }
+                        true
+                    }
+                    else -> {
+                        NavigationUI.onNavDestinationSelected(item, navController)
+                    }
+                }
+            }
         }
+
+
         setupViewModel()
         checkUserSession()
-
-
     }
 
     private fun setupViewModel() {
