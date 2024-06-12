@@ -90,7 +90,6 @@ class Profile : Fragment() {
                 {}
             )
         }
-
         binding.rlListRiwayatDeteksi.setOnClickListener {
             val intent = Intent(requireContext(), MainActivity::class.java).apply {
                 putExtra("fragmentToOpen", "history")
@@ -99,8 +98,6 @@ class Profile : Fragment() {
 
         }
     }
-
-
 
     private fun setupViewModel() {
         mainViewModel = ViewModelProvider(

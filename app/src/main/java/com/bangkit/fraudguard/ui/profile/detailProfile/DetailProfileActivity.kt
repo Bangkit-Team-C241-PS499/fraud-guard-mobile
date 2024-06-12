@@ -84,9 +84,8 @@ class DetailProfileActivity : AppCompatActivity() {
         binding.changePasswordCard.setOnClickListener {
             var intent = Intent(this, ChangePasswordActivity::class.java)
             startActivity(intent)
-
-
         }
+
     }
 
     override fun onResume() {
