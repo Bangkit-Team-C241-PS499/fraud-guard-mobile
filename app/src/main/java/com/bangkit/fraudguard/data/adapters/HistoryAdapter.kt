@@ -1,22 +1,35 @@
 package com.bangkit.fraudguard.data.adapters
 
+import android.app.Activity
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkit.fraudguard.R
 import com.bangkit.fraudguard.data.dto.response.History
 import com.bangkit.fraudguard.data.dto.response.HistoryResponse
 import com.bangkit.fraudguard.databinding.ItemHistoryBinding
+import com.bangkit.fraudguard.ui.history.HistoryDetailActivity
 import okhttp3.internal.format
 import java.text.SimpleDateFormat
 import java.util.Locale
+import java.util.TimeZone
+import kotlin.math.log
 
 class HistoryAdapter: ListAdapter<History, HistoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(private val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(history: History) {
             binding.title.text = "${history.message}"
             binding.historyDate.text = formatDate(history.createdAt)
+            if(history.label=="scam"){
+                binding.icon.setImageResource(R.drawable.spam)
+            }else{
+                binding.icon.setImageResource(R.drawable.not_spam)
+            }
 
         }
     }
@@ -32,6 +45,11 @@ class HistoryAdapter: ListAdapter<History, HistoryAdapter.MyViewHolder>(DIFF_CAL
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val history = getItem(position)
         holder.bind(history)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, HistoryDetailActivity::class.java)
+            intent.putExtra("id", history?.id)
+            holder.itemView.context.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(holder.itemView.context as Activity).toBundle())
+        }
     }
 
     companion object {
@@ -46,10 +64,16 @@ class HistoryAdapter: ListAdapter<History, HistoryAdapter.MyViewHolder>(DIFF_CAL
         private fun formatDate(dateTimeString: String?): String {
             if (dateTimeString == null) return ""
 
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("dd MMMM yyyy HH:mm", Locale.getDefault())
-            val date = inputFormat.parse(dateTimeString)
-            return outputFormat.format(date!!)
+            return try {
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+                val outputFormat = SimpleDateFormat("dd MMMM yyyy HH:mm", Locale.getDefault())
+                outputFormat.timeZone = TimeZone.getDefault()
+                val date = inputFormat.parse(dateTimeString)
+                outputFormat.format(date!!)
+            } catch (e: Exception) {
+                ""
+            }
         }
     }
 

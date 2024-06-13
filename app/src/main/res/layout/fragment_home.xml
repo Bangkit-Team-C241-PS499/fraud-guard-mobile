@@ -165,12 +165,27 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="10dp"
-        android:text="Riwayat Deteksi Spam Anda Hari ini"
+        android:text="Riwayat Deteksi Spam Anda"
         android:textStyle="bold"
+        style="@style/DescriptionBlack14"
         app:layout_constraintBottom_toTopOf="@+id/rv_history"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/middle"
         app:layout_constraintVertical_bias="0.782" />
+
+    <TextView
+        android:id="@+id/textViewSeeMore"
+        style="@style/DescriptionBlack14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="296dp"
+        android:layout_marginBottom="10dp"
+        android:text="Selengkapnya"
+        app:layout_constraintBottom_toTopOf="@+id/rv_history"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/middle"
+        app:layout_constraintVertical_bias="0.782"
+        android:textColor="#1B5BBB"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history"

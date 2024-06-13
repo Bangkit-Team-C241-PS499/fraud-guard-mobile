@@ -6,17 +6,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bangkit.fraudguard.R
 import com.bangkit.fraudguard.data.adapters.HistoryAdapter
 import com.bangkit.fraudguard.data.adapters.SmallArticleListAdapter
 import com.bangkit.fraudguard.data.dto.response.ArticlesItem
 import com.bangkit.fraudguard.data.dto.response.History
 import com.bangkit.fraudguard.databinding.FragmentHomeBinding
+import com.bangkit.fraudguard.ui.history.HistoryFragment
+import com.bangkit.fraudguard.ui.main.MainActivity
 import com.bangkit.fraudguard.ui.main.MainViewModel
+import com.bangkit.fraudguard.ui.profile.detailProfile.DetailProfileActivity
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import com.bangkit.fraudguard.ui.welcome.WelcomeActivity
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -50,15 +59,25 @@ class HomeFragment : Fragment() {
         showShimmer()
         showHistory()
         showArticles()
-
+        setupAction()
         return root
     }
+
     private fun setupViewModel() {
-        Log.e("HOMEFRAGMENT", "tess")
 
         viewModel = ViewModelProvider(
             requireActivity(), ViewModelFactory.getInstance(requireContext())
         ).get(MainViewModel::class.java)
+    }
+
+
+    private fun setupAction(){
+        binding.textViewSeeMore.setOnClickListener() {
+            val intent = Intent(requireContext(), MainActivity::class.java).apply {
+                putExtra("fragmentToOpen", "history")
+            }
+            startActivity(intent)
+        }
     }
     private fun checkUserSession() {
         viewModel.getSession().observe(viewLifecycleOwner, Observer { userModel ->

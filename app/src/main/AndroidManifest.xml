@@ -23,9 +23,15 @@
         android:theme="@style/Theme.Fraudguard"
         tools:targetApi="31">
         <activity
+            android:name=".ui.home.HistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.Coba"
             android:exported="false"
             android:theme="@style/Theme.Fraudguard" />
+        <activity
+            android:name=".ui.history.HistoryDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.profile.profilePage.profilePageActivity"
             android:exported="false" />

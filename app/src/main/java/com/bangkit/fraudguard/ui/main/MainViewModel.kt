@@ -1,5 +1,6 @@
 package com.bangkit.fraudguard.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -107,6 +108,24 @@ class MainViewModel(
         emitSource(responseLiveData)
 
     }
+    fun getHistoryDetail(id:String) : LiveData<Response<History>> = liveData {
+        val responseLiveData = MutableLiveData<Response<History>>()
+        spamRepository.historyDetail(id).enqueue(object : Callback<History> {
+            override fun onResponse(call: Call<History>, response: Response<History>) {
+                responseLiveData.value = response
+            }
+
+            override fun onFailure(call: Call<History>, t: Throwable) {
+                val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
+                val errorResponse = Response.error<History>(500, errorBody)
+                responseLiveData.value = errorResponse
+            }
+        })
+        emitSource(responseLiveData)
+
+    }
+
+
 
 
     fun showProfile(): LiveData<Response<ProfileResponse>> = liveData {

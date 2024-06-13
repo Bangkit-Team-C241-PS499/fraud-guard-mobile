@@ -60,4 +60,5 @@
     <string name="failed_login_text">Gagal login !\n</string>
     <string name="failed_register_text">Gagal registrasi !</string>
     <string name="password_mismatch">Kombinasi password baru tidak sama\n</string>
+    <string name="selengkapnya_text"><u>Selengkapnya</u></string>
 </resources>
