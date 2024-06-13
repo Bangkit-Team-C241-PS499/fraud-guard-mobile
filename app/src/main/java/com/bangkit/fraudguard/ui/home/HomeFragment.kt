@@ -6,17 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bangkit.fraudguard.R
 import com.bangkit.fraudguard.data.adapters.HistoryAdapter
 import com.bangkit.fraudguard.data.adapters.SmallArticleListAdapter
 import com.bangkit.fraudguard.data.dto.response.ArticlesItem
@@ -88,14 +83,17 @@ class HomeFragment : Fragment() {
         })
     }
     private fun showHistory() {
+        binding.progressBar.visibility = View.VISIBLE // Show progress bar
+
         viewModel.getHistory().observe(viewLifecycleOwner, Observer { response ->
+            binding.progressBar.visibility = View.GONE // Hide progress bar when data is loaded
+
             if (response.isSuccessful) {
                 val historyList: List<History>? = response.body()
                 if (historyList != null) {
                     val adapter = HistoryAdapter()
                     adapter.submitList(historyList)
                     binding.rvHistory.adapter = adapter
-
                 } else {
                     Log.e("HOMEFRAGMENT", "History list is null")
                 }
@@ -104,6 +102,7 @@ class HomeFragment : Fragment() {
             }
         })
     }
+
 
     private fun showArticles() {
         viewModel.getArticle().observe(viewLifecycleOwner, Observer { response ->

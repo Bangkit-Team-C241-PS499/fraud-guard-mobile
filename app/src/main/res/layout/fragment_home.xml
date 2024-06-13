@@ -200,4 +200,29 @@
         app:layout_constraintTop_toBottomOf="@id/middle"
         app:layout_constraintVertical_bias="0.294" />
 
+    <RelativeLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:background="@drawable/list_menu_bar"
+        android:backgroundTint="@color/broken_white"
+        android:elevation="10dp"
+        android:visibility="gone"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_history"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/secondary"
+            android:padding="10dp"
+            android:progressTint="@color/white"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
