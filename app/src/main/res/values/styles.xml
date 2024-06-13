@@ -80,5 +80,19 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="roundedArticleImageView">
+        <item name="cornerSize">10dp</item>
+    </style>
+    <style name="roundedImageTop">
+        <item name="cornerSizeTopLeft">10dp</item>
+        <item name="cornerSizeTopRight">10dp</item>
+    </style>
+
+    <style name="DescriptionBlack14_bold">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 
 </resources>

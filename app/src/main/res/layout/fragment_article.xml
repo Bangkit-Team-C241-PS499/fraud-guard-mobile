@@ -1,14 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.article.ArticleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/heading_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/heading_title"
+            style="@style/HeadingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:background="@drawable/heading_bar"
+            android:paddingStart="21dp"
+            android:paddingTop="27dp"
+            android:paddingBottom="27dp"
+            android:text="Artikel Untuk Anda"
+            android:textColor="#000000"
+            tools:ignore="RtlSymmetry" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/background"
+        android:scaleType="fitStart"
+        android:src="@drawable/background_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/background_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="431dp"
+        android:layout_marginBottom="300dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_percent="0.63"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/upper_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.12038304" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="18dp"
+        android:text="Artikel Terbaru"
+        style="@style/DescriptionBlack14_semibold"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heading_card"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:gravity="top"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+   >
+
+        <include layout="@layout/item_article_shimmer" />
+
+        <include layout="@layout/item_article_shimmer" />
+
+        <include layout="@layout/item_article_shimmer" />
+
+
+        <include layout="@layout/item_article_shimmer" />
+        <include layout="@layout/item_article_shimmer" />
+        <include layout="@layout/item_article_shimmer" />
+        <include layout="@layout/item_article_shimmer" />
+
+
+
+
+    </LinearLayout>
+
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv_articles"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:padding="6dp"
+    android:layout_marginStart="18dp"
+    android:layout_marginEnd="18dp"
+    app:layout_constraintTop_toBottomOf="@+id/textView"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+
+/>
+</androidx.constraintlayout.widget.ConstraintLayout>
