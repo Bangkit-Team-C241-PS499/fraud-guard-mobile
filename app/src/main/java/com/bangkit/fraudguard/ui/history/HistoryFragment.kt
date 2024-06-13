@@ -60,21 +60,25 @@ class HistoryFragment : Fragment() {
         })
     }
     private fun showHistory() {
+        binding.progressBar.visibility = View.VISIBLE // Show progress bar
+
         viewModel.getHistory().observe(viewLifecycleOwner, Observer { response ->
+            binding.progressBar.visibility = View.GONE // Hide progress bar when data is loaded
+
             if (response.isSuccessful) {
                 val historyList: List<History>? = response.body()
                 if (historyList != null) {
                     val adapter = HistoryAdapter()
                     adapter.submitList(historyList)
                     binding.rvHistoryPage.adapter = adapter
-
                 } else {
-                    Log.e("HOMEFRAGMENT", "History list is null")
+                    Log.e("HISTORYFRAGMENT", "History list is null")
                 }
             } else {
-                Log.e("HOMEFRAGMENT", "Failed to load history: ${response.errorBody()?.string()}")
+                Log.e("HISTORYFRAGMENT", "Failed to load history: ${response.errorBody()?.string()}")
             }
         })
     }
+
 
 }
