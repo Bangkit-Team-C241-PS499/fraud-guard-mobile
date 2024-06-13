@@ -8,11 +8,13 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import com.bangkit.fraudguard.data.dto.request.ChangePasswordRequest
 import com.bangkit.fraudguard.data.dto.request.UpdateProfileRequest
+import com.bangkit.fraudguard.data.dto.response.ArticleResponse
 import com.bangkit.fraudguard.data.dto.response.ChangePhotoResponse
 import com.bangkit.fraudguard.data.dto.response.History
 import com.bangkit.fraudguard.data.dto.response.ObjectResponse
 import com.bangkit.fraudguard.data.dto.response.ProfileResponse
 import com.bangkit.fraudguard.data.model.UserModel
+import com.bangkit.fraudguard.data.repository.ArticleRepository
 import com.bangkit.fraudguard.data.repository.SpamRepository
 import kotlinx.coroutines.runBlocking
 import okhttp3.MultipartBody
@@ -22,7 +24,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel(
-    private val spamRepository: SpamRepository
+    private val spamRepository: SpamRepository,
+    private val articleRepository: ArticleRepository
 ) : ViewModel() {
     fun getSession(): LiveData<UserModel> {
         return spamRepository.getSession().asLiveData()
@@ -39,6 +42,29 @@ class MainViewModel(
             spamRepository.saveSession(userModel)
         }
     }
+
+    fun getArticle(): LiveData<Response<ArticleResponse>> = liveData {
+        val responseLiveData = MutableLiveData<Response<ArticleResponse>>()
+
+        articleRepository.getArticle("prevent+AND+spam", "en", "relevancy").enqueue(object : Callback<ArticleResponse> {
+            override fun onResponse(
+                call: Call<ArticleResponse>,
+                response: Response<ArticleResponse>
+            ) {
+                responseLiveData.value = response
+            }
+
+            override fun onFailure(call: Call<ArticleResponse>, t: Throwable) {
+                // Handle failure
+                val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
+                val errorResponse = Response.error<ArticleResponse>(500, errorBody)
+                responseLiveData.value = errorResponse
+            }
+        })
+
+        emitSource(responseLiveData)
+    }
+
 
     fun deleteAllPredictions(): LiveData<Response<ObjectResponse>> = liveData {
         val responseLiveData = MutableLiveData<Response<ObjectResponse>>()

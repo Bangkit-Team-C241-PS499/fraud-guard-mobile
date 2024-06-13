@@ -22,6 +22,10 @@ android {
     buildTypes {
         release {
             buildConfigField("String", "BASE_URL", "\"http://34.143.137.97:3000/api/\"")
+            buildConfigField("String", "ARTICLE_URL", "\"https://newsapi.org/v2/\"")
+            buildConfigField("String", "ARTICLE_KEY", "db46b4d29d5d48659b3583e9b1e897f5")
+
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -30,6 +34,10 @@ android {
         }
         debug {
             buildConfigField("String", "BASE_URL", "\"http://34.143.137.97:3000/api/\"")
+            buildConfigField("String", "ARTICLE_URL", "\"https://newsapi.org/v2/\"")
+            buildConfigField("String", "ARTICLE_KEY", "\"db46b4d29d5d48659b3583e9b1e897f5\"")
+
+
         }
     }
     compileOptions {
@@ -63,7 +71,7 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.glide)
     kapt(libs.glide.compiler)
-
+    implementation(libs.shimmer)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp3.logging)
