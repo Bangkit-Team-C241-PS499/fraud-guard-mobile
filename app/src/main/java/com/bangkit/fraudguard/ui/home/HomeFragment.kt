@@ -42,7 +42,8 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
         setupViewModel()
         checkUserSession()
-        binding.rvArticles.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvArticles.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvHistory.layoutManager = LinearLayoutManager(requireActivity())
         showShimmer()
         observeProfile()
@@ -75,7 +76,7 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun setupAction(){
+    private fun setupAction() {
         binding.textViewSeeMore.setOnClickListener() {
             val intent = Intent(requireContext(), MainActivity::class.java).apply {
                 putExtra("fragmentToOpen", "history")
@@ -95,7 +96,15 @@ class HomeFragment : Fragment() {
             }
             startActivity(intent)
         }
+
+        binding.icon.setOnClickListener() {
+            val intent = Intent(requireContext(), MainActivity::class.java).apply {
+                putExtra("fragmentToOpen", "profile")
+            }
+            startActivity(intent)
+        }
     }
+
     private fun checkUserSession() {
         viewModel.getSession().observe(viewLifecycleOwner, Observer { userModel ->
             if (!userModel.isLogin) {
@@ -104,28 +113,29 @@ class HomeFragment : Fragment() {
             }
         })
     }
+
     private fun showHistory() {
-        binding.progressBar.visibility = View.VISIBLE // Show progress bar
+        showShimmerHistory(true)
 
         viewModel.getHistory().observe(viewLifecycleOwner, Observer { response ->
-            binding.progressBar.visibility = View.GONE // Hide progress bar when data is loaded
 
             if (response.isSuccessful) {
+                showShimmerHistory(false)
                 val historyList: List<History>? = response.body()
                 if (historyList?.size!! > 0) {
-                    binding.rvHistory.visibility = View.VISIBLE
-                    binding.clEmptyHistory.visibility = View.INVISIBLE
+                    showRvHistory(true)
+                    showEmptyHistory(false)
                     val adapter = HistoryAdapter()
                     adapter.submitList(historyList)
                     binding.rvHistory.adapter = adapter
-                } else if(historyList?.size == 0) {
-                    binding.rvHistory.visibility = View.INVISIBLE
-                    binding.clEmptyHistory.visibility = View.VISIBLE
+
+                } else if (historyList?.size == 0) {
+                    showRvHistory(false)
+                    showEmptyHistory(true)
                     Log.e("HOMEFRAGMENT", "History list is null")
                 }
             } else {
-                binding.rvHistory.visibility = View.INVISIBLE
-                binding.clEmptyHistory.visibility = View.VISIBLE
+                showCustomToast(requireActivity(), "Failed to load history")
                 Log.e("HOMEFRAGMENT", "Failed to load history: ${response.errorBody()?.string()}")
             }
         })
@@ -133,20 +143,26 @@ class HomeFragment : Fragment() {
 
 
     private fun showArticles() {
+        showShimmerArticle(true)
         viewModel.getArticle().observe(viewLifecycleOwner, Observer { response ->
             if (response.isSuccessful) {
-                hideShimmer()
+                showShimmerArticle(false)
+                showRvArticles(true)
+
                 val articleList: List<ArticlesItem?>? = response.body()?.articles
-                if (articleList != null) {
+                if (articleList?.size!! > 0) {
                     val adapter = SmallArticleListAdapter()
                     adapter.submitList(articleList)
                     binding.rvArticles.adapter = adapter
 
-                } else  {
+                } else {
+                    showCustomToast(requireActivity(), "Gagal Memuat Artikel")
                     Log.e("HOMEFRAGMENT", "Article list is null")
                 }
             } else {
-                hideShimmer()
+                showShimmerArticle(false)
+                showCustomToast(requireActivity(), "Gagal Memuat Artikel")
+
                 Log.e("HOMEFRAGMENT", "Failed to load Article: ${response.errorBody()?.string()}")
             }
         })
@@ -165,24 +181,71 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun showEmptyHistory() {
-        binding.rvHistory.visibility = View.INVISIBLE
-        binding.clEmptyHistory.visibility = View.VISIBLE
+    private fun showEmptyHistory(isShow: Boolean) {
+        if (isShow) {
+            binding.clEmptyHistory.visibility = View.VISIBLE
+        } else {
+            binding.clEmptyHistory.visibility = View.INVISIBLE
+        }
     }
 
-    private fun hideShimmer() {
+    private fun showShimmerArticle(isShow: Boolean) {
         var linearLayout = binding.rvArticlesShimmer
         for (i in 0 until linearLayout.childCount) {
             val child = linearLayout.getChildAt(i)
             if (child is ShimmerFrameLayout) {
-                child.startShimmer()
+                if (isShow) {
+                    child.startShimmer()
+                } else {
+                    child.stopShimmer()
+                }
+
+
             }
         }
-        linearLayout.visibility = View.GONE
+        if (isShow) {
+            linearLayout.visibility = View.VISIBLE
+        } else {
+            linearLayout.visibility = View.GONE
+        }
+    }
 
-        binding.rvArticles.visibility = View.VISIBLE
+    private fun showShimmerHistory(isShow: Boolean){
+        var linearLayout = binding.shimmerViewContainer
+        for (i in 0 until linearLayout.childCount) {
+            val child = linearLayout.getChildAt(i)
+            if (child is ShimmerFrameLayout) {
+                if (isShow) {
+                    child.startShimmer()
+                } else {
+                    child.stopShimmer()
+                }
+            }
+        }
+        if (isShow) {
+            linearLayout.visibility = View.VISIBLE
+        } else {
+            linearLayout.visibility = View.GONE
+        }
 
     }
+
+    private fun showRvHistory(isShow: Boolean){
+        if (isShow) {
+            binding.rvHistory.visibility = View.VISIBLE
+        } else {
+            binding.rvHistory.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun showRvArticles(isShow: Boolean){
+        if (isShow) {
+            binding.rvArticles.visibility = View.VISIBLE
+        } else {
+            binding.rvArticles.visibility = View.INVISIBLE
+        }
+    }
+
 
 
 

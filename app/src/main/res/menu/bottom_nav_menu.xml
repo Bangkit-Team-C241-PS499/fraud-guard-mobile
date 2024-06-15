@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
+        android:textColor="@color/black"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_article"
         android:icon="@drawable/outline_article_24"
+        style="@style/DescriptionGrey12"
+
         android:title="@string/title_article" />
 
     <item
         android:id="@+id/navigation_create"
+        style="@style/DescriptionGrey12"
+
         android:icon="@drawable/baseline_add_box_24"
         android:title="@string/title_create" />
     <item
         android:id="@+id/navigation_history"
         android:icon="@drawable/baseline_history_24"
+        style="@style/DescriptionGrey12"
+
         android:title="@string/title_history" />
     <item
         android:id="@+id/navigation_profile"
+        style="@style/DescriptionGrey12"
+
         android:icon="@drawable/baseline_person_24_navbar"
         android:title="@string/title_profile" />
 

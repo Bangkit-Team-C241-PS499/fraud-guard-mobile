@@ -32,7 +32,7 @@
         android:id="@+id/welcomeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginHorizontal="18dp"
         android:layout_marginTop="12dp"
         android:text="Selamat Datang di FraudGuard!"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,19 +43,18 @@
 
     <TextView
         android:id="@+id/welcome_description"
-        android:layout_width="334dp"
-        android:layout_height="54dp"
-        android:layout_marginLeft="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Jangan hilangkan kesempatan untuk menggunakan aplikasi terkeran sepanjang masa"
+        android:text="Bergabunglah dengan kami dan jadilah bagian dari komunitas yang peduli terhadap keamanan data pribadi Anda."
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.262"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTitle"
         app:layout_constraintVertical_bias="0.006"
-        style="@style/DescriptionBlack12"
+        style="@style/DescriptionBlack14"
         />
 
     <ImageView
@@ -70,22 +69,28 @@
 
     <Button
         android:id="@+id/LoginButton"
-        style="@style/DescriptionBlack14"
-        android:layout_width="235dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="192dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:paddingVertical="10dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/secondary"
         android:text="Masuk"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintBottom_toTopOf="@+id/RegisterButton"
+        />
 
     <Button
         android:id="@+id/RegisterButton"
-        android:layout_width="235dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:paddingVertical="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="36dp"
         android:text="Daftar"
         android:backgroundTint="@color/white"
         android:textColor="@color/secondary"
@@ -93,7 +98,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LoginButton"
         app:layout_constraintVertical_bias="0.105" />
 
     <androidx.constraintlayout.widget.Guideline

@@ -54,6 +54,7 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
+            android:theme="@style/Theme.Fraudguard"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
