@@ -9,20 +9,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.fraudguard.data.adapters.HistoryAdapter
 import com.bangkit.fraudguard.data.adapters.SmallArticleListAdapter
 import com.bangkit.fraudguard.data.dto.response.ArticlesItem
 import com.bangkit.fraudguard.data.dto.response.History
+import com.bangkit.fraudguard.data.dto.response.ProfileResponse
 import com.bangkit.fraudguard.databinding.FragmentHomeBinding
-import com.bangkit.fraudguard.ui.history.HistoryFragment
+import com.bangkit.fraudguard.ui.customView.showCustomToast
 import com.bangkit.fraudguard.ui.main.MainActivity
 import com.bangkit.fraudguard.ui.main.MainViewModel
-import com.bangkit.fraudguard.ui.profile.detailProfile.DetailProfileActivity
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import com.bangkit.fraudguard.ui.welcome.WelcomeActivity
+import com.bumptech.glide.Glide
 import com.facebook.shimmer.ShimmerFrameLayout
 
 class HomeFragment : Fragment() {
@@ -45,13 +44,8 @@ class HomeFragment : Fragment() {
         checkUserSession()
         binding.rvArticles.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvHistory.layoutManager = LinearLayoutManager(requireActivity())
-        binding.rvHistory.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                LinearLayoutManager(requireActivity()).orientation
-            )
-        )
         showShimmer()
+        observeProfile()
         showHistory()
         showArticles()
         setupAction()
@@ -65,11 +59,39 @@ class HomeFragment : Fragment() {
         ).get(MainViewModel::class.java)
     }
 
+    private fun observeProfile() {
+        viewModel.showProfile().observe(viewLifecycleOwner, Observer { response ->
+            if (response.isSuccessful) {
+                val profile: ProfileResponse? = response.body()
+                // Update UI dengan data profile
+                binding.headingTitle.text = "Halo, ${profile?.name}"
+                if (profile?.photoUrl != null) {
+                    Glide.with(requireContext()).load(profile.photoUrl).into(binding.icon)
+                }
+            } else {
+                showCustomToast(requireContext(), "Gagal memuat data profile")
+            }
+        })
+    }
+
 
     private fun setupAction(){
         binding.textViewSeeMore.setOnClickListener() {
             val intent = Intent(requireContext(), MainActivity::class.java).apply {
                 putExtra("fragmentToOpen", "history")
+            }
+            startActivity(intent)
+        }
+
+        binding.artikelSelengkapnya.setOnClickListener() {
+            val intent = Intent(requireContext(), MainActivity::class.java).apply {
+                putExtra("fragmentToOpen", "article")
+            }
+            startActivity(intent)
+        }
+        binding.btnCekSpam.setOnClickListener() {
+            val intent = Intent(requireContext(), MainActivity::class.java).apply {
+                putExtra("fragmentToOpen", "create")
             }
             startActivity(intent)
         }
@@ -90,14 +112,21 @@ class HomeFragment : Fragment() {
 
             if (response.isSuccessful) {
                 val historyList: List<History>? = response.body()
-                if (historyList != null) {
+                if (historyList?.size!! > 0) {
+                    binding.rvHistory.visibility = View.VISIBLE
+                    binding.clEmptyHistory.visibility = View.INVISIBLE
                     val adapter = HistoryAdapter()
                     adapter.submitList(historyList)
                     binding.rvHistory.adapter = adapter
-                } else {
+                    Log.d("HOMEFRAGMENT", "asu asu \n History list: $historyList")
+                } else if(historyList?.size == 0) {
+                    binding.rvHistory.visibility = View.INVISIBLE
+                    binding.clEmptyHistory.visibility = View.VISIBLE
                     Log.e("HOMEFRAGMENT", "History list is null")
                 }
             } else {
+                binding.rvHistory.visibility = View.INVISIBLE
+                binding.clEmptyHistory.visibility = View.VISIBLE
                 Log.e("HOMEFRAGMENT", "Failed to load history: ${response.errorBody()?.string()}")
             }
         })
@@ -114,7 +143,7 @@ class HomeFragment : Fragment() {
                     adapter.submitList(articleList)
                     binding.rvArticles.adapter = adapter
 
-                } else {
+                } else  {
                     Log.e("HOMEFRAGMENT", "Article list is null")
                 }
             } else {
@@ -137,6 +166,11 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun showEmptyHistory() {
+        binding.rvHistory.visibility = View.INVISIBLE
+        binding.clEmptyHistory.visibility = View.VISIBLE
+    }
+
     private fun hideShimmer() {
         var linearLayout = binding.rvArticlesShimmer
         for (i in 0 until linearLayout.childCount) {
@@ -150,6 +184,8 @@ class HomeFragment : Fragment() {
         binding.rvArticles.visibility = View.VISIBLE
 
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

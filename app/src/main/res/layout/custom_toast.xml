@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
-    android:padding="4dp"
+    android:padding="8dp"
     android:layout_centerHorizontal="true"
     android:background="@drawable/toast_shape"
     android:layout_width="wrap_content"
@@ -11,9 +11,9 @@
 
     <ImageView
         android:id="@+id/toast_image"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:src="@drawable/baseline_notifications_24"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/icon_splash"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,11 +28,11 @@
         android:layout_height="wrap_content"
         android:paddingStart="8dp"
         android:paddingLeft="8dp"
-        android:textStyle="bold"
+
         android:layout_marginEnd="8dp"
         android:text="Custom jdnfjdnfjdnfjndjfnndfjnjndfj \n jnajgnajn"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="16dp" />

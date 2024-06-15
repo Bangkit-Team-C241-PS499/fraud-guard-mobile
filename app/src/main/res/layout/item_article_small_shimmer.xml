@@ -27,7 +27,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:paddingHorizontal="8dp"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
@@ -70,8 +70,8 @@
             <TextView
                 android:id="@+id/releaseDate"
                 style="@style/DescriptionBlack12"
-                android:layout_width="40dp"
-                android:layout_height="10dp"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
                 android:paddingHorizontal="8dp"
                 android:paddingTop="12dp"
                 android:layout_marginTop="12dp"
@@ -85,9 +85,9 @@
             <TextView
                 android:id="@+id/author"
                 style="@style/DescriptionBlack12"
-                android:layout_width="40dp"
+                android:layout_width="70dp"
                 android:layout_marginTop="12dp"
-                android:layout_height="10dp"
+                android:layout_height="20dp"
                 android:maxLines="1"
                 android:paddingHorizontal="8dp"
                 android:background="@drawable/shimmer_content"
