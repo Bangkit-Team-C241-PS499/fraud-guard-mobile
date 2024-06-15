@@ -1,7 +1,5 @@
 package com.bangkit.fraudguard.data.dto.response
 
-import java.util.Date
-
 data class HistoryResponse(
 	val response: List<History>
 )
@@ -12,6 +10,7 @@ data class History(
 	val userId: Int? = null,
 	val id: String? = null,
 	val label: String? = null,
+	val prediction: Float? = null,
 	val message: String? = null,
 	val timestamp: String? = null,
 	val updatedAt: String? = null,
