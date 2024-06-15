@@ -128,7 +128,7 @@ class HomeFragment : Fragment() {
                     val adapter = HistoryAdapter()
                     adapter.submitList(historyList)
                     binding.rvHistory.adapter = adapter
-                    Log.d("HOMEFRAGMENT", "asu asu \n History list: $historyList")
+
                 } else if (historyList?.size == 0) {
                     showRvHistory(false)
                     showEmptyHistory(true)
