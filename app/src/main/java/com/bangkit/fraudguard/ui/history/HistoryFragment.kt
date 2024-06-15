@@ -13,9 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.fraudguard.data.adapters.HistoryAdapter
 import com.bangkit.fraudguard.data.dto.response.History
 import com.bangkit.fraudguard.databinding.FragmentHistoryBinding
+import com.bangkit.fraudguard.ui.customView.showCustomToast
+import com.bangkit.fraudguard.ui.main.MainActivity
 import com.bangkit.fraudguard.ui.main.MainViewModel
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import com.bangkit.fraudguard.ui.welcome.WelcomeActivity
+import com.facebook.shimmer.ShimmerFrameLayout
 
 
 class HistoryFragment : Fragment() {
@@ -32,17 +35,28 @@ class HistoryFragment : Fragment() {
         setupViewModel()
         checkUserSession()
         binding.rvHistoryPage.layoutManager = LinearLayoutManager(requireActivity())
-
+        setupAction()
         showHistory()
         return root
 
     }
+
+    private fun setupAction() {
+        binding.btnCekSpam.setOnClickListener {
+            val intent = Intent(requireContext(), MainActivity::class.java).apply {
+                putExtra("fragmentToOpen", "create")
+            }
+            startActivity(intent)
+        }
+    }
+
     private fun setupViewModel() {
 
         viewModel = ViewModelProvider(
             requireActivity(), ViewModelFactory.getInstance(requireContext())
         ).get(MainViewModel::class.java)
     }
+
     private fun checkUserSession() {
         viewModel.getSession().observe(viewLifecycleOwner, Observer { userModel ->
             if (!userModel.isLogin) {
@@ -51,25 +65,77 @@ class HistoryFragment : Fragment() {
             }
         })
     }
+
     private fun showHistory() {
-        binding.progressBar.visibility = View.VISIBLE // Show progress bar
+        showShimmer(true)
+        showRecyclerView(false)
+        showEmptyHistoryList(false)
 
         viewModel.getHistory().observe(viewLifecycleOwner, Observer { response ->
-            binding.progressBar.visibility = View.GONE // Hide progress bar when data is loaded
 
             if (response.isSuccessful) {
                 val historyList: List<History>? = response.body()
-                if (historyList != null) {
+                showShimmer(false)
+
+                if (historyList?.size != 0) {
+                    showRecyclerView(true)
                     val adapter = HistoryAdapter()
                     adapter.submitList(historyList)
                     binding.rvHistoryPage.adapter = adapter
-                } else {
+                } else if (historyList?.size == 0) {
+                    showRecyclerView(false)
+                    showEmptyHistoryList(true)
                     Log.e("HISTORYFRAGMENT", "History list is null")
                 }
             } else {
-                Log.e("HISTORYFRAGMENT", "Failed to load history: ${response.errorBody()?.string()}")
+                showCustomToast(requireActivity(), "Failed to load history")
+                showShimmer(false)
+                Log.e(
+                    "HISTORYFRAGMENT",
+                    "Failed to load history: ${response.errorBody()?.string()}"
+                )
             }
         })
+    }
+
+    private fun showShimmer(isShow: Boolean) {
+
+        if (isShow) {
+            binding.shimmerViewContainer.visibility = View.VISIBLE
+
+            var linearLayout = binding.shimmerViewContainer
+            linearLayout.visibility = View.VISIBLE
+            for (i in 0 until linearLayout.childCount) {
+                val child = linearLayout.getChildAt(i)
+                if (child is ShimmerFrameLayout) {
+                    child.startShimmer()
+                }
+            }
+        } else {
+            binding.shimmerViewContainer.visibility = View.INVISIBLE
+            for (i in 0 until binding.shimmerViewContainer.childCount) {
+                val child = binding.shimmerViewContainer.getChildAt(i)
+                if (child is ShimmerFrameLayout) {
+                    child.stopShimmer()
+                }
+            }
+        }
+    }
+
+    private fun showRecyclerView(isShow: Boolean) {
+        if (isShow) {
+            binding.rvHistoryPage.visibility = View.VISIBLE
+        } else {
+            binding.rvHistoryPage.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun showEmptyHistoryList(isShow: Boolean) {
+        if (isShow) {
+            binding.clEmptyHistory.visibility = View.VISIBLE
+        } else {
+            binding.clEmptyHistory.visibility = View.INVISIBLE
+        }
     }
 
 

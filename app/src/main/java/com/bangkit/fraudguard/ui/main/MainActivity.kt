@@ -97,6 +97,23 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        } else if (fragmentToOpen == "profile") {
+            navController.navigate(R.id.navigation_profile)
+            navView.setOnNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.navigation_home -> {
+                        if (navController.currentDestination?.id == R.id.navigation_profile) {
+                            navController.popBackStack()
+                        } else {
+                            navController.navigate(R.id.navigation_home)
+                        }
+                        true
+                    }
+                    else -> {
+                        NavigationUI.onNavDestinationSelected(item, navController)
+                    }
+                }
+            }
         }
 
 
