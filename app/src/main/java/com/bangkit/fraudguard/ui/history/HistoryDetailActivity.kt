@@ -4,27 +4,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.marginStart
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import com.bangkit.fraudguard.R
 import com.bangkit.fraudguard.databinding.ActivityHistoryDetailBinding
-import com.bangkit.fraudguard.databinding.ActivityMainBinding
-import com.bangkit.fraudguard.databinding.ActivityProfilePageBinding
-import com.bangkit.fraudguard.ui.article.ArticleFragment
-import com.bangkit.fraudguard.ui.create.CreateFragment
-import com.bangkit.fraudguard.ui.main.MainActivity
 import com.bangkit.fraudguard.ui.main.MainViewModel
-import com.bangkit.fraudguard.ui.profile.profilePage.Profile
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import com.bangkit.fraudguard.ui.welcome.WelcomeActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HistoryDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryDetailBinding
@@ -41,6 +28,7 @@ class HistoryDetailActivity : AppCompatActivity() {
 
 
         ID = intent.getStringExtra("id") ?: ""
+
         showDetail()
     }
 
@@ -50,7 +38,7 @@ class HistoryDetailActivity : AppCompatActivity() {
                 val responseBody = response.body()
                 if(responseBody!=null){
                     binding.textLabel.text = responseBody.message
-                    if(responseBody.label=="scam"){
+                    if(responseBody.label=="penipuan"){
                         binding.bottom.setBackgroundResource(R.drawable.list_detail_spam_desc_bar)
                         binding.textDescTop.text = "Spam"
                         binding.textDesc.marginStart
@@ -60,7 +48,6 @@ class HistoryDetailActivity : AppCompatActivity() {
                         binding.bottom.setBackgroundResource(R.drawable.list_detail_desc_bar)
                         binding.textDescTop.text = "Non-Spam"
                         binding.textDescTop.setTextColor(Color.parseColor("#3FC464"))
-
                     }
                 }
             }

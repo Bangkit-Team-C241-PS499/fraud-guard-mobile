@@ -7,11 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import com.bangkit.fraudguard.data.dto.request.ChangePasswordRequest
+import com.bangkit.fraudguard.data.dto.request.PredictRequest
 import com.bangkit.fraudguard.data.dto.request.UpdateProfileRequest
 import com.bangkit.fraudguard.data.dto.response.ArticleResponse
 import com.bangkit.fraudguard.data.dto.response.ChangePhotoResponse
 import com.bangkit.fraudguard.data.dto.response.History
 import com.bangkit.fraudguard.data.dto.response.ObjectResponse
+import com.bangkit.fraudguard.data.dto.response.PredictResponse
 import com.bangkit.fraudguard.data.dto.response.ProfileResponse
 import com.bangkit.fraudguard.data.model.UserModel
 import com.bangkit.fraudguard.data.repository.ArticleRepository
@@ -102,6 +104,26 @@ class MainViewModel(
             override fun onFailure(call: Call<List<History>>, t: Throwable) {
                 val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
                 val errorResponse = Response.error<List<History>>(500, errorBody)
+                responseLiveData.value = errorResponse
+            }
+        })
+        emitSource(responseLiveData)
+
+    }
+    fun predict(predictRequest: PredictRequest): LiveData<Response<PredictResponse>> = liveData {
+        val responseLiveData = MutableLiveData<Response<PredictResponse>>()
+
+        spamRepository.predict(predictRequest).enqueue(object : Callback<PredictResponse> {
+            override fun onResponse(
+                call: Call<PredictResponse>,
+                response: Response<PredictResponse>
+            ) {
+                responseLiveData.value = response
+            }
+
+            override fun onFailure(call: Call<PredictResponse>, t: Throwable) {
+                val errorBody = (t.message ?: "Unknown error").toResponseBody(null)
+                val errorResponse = Response.error<PredictResponse>(500, errorBody)
                 responseLiveData.value = errorResponse
             }
         })
