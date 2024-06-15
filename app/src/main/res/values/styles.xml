@@ -78,6 +78,8 @@
 
     <style name="roundedImageView">
         <item name="cornerSize">50%</item>
+        <item name="strokeColor">@color/secondary</item>
+        <item name="strokeWidth">1dp</item>
     </style>
 
     <style name="roundedArticleImageView">

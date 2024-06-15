@@ -2,21 +2,13 @@ package com.bangkit.fraudguard.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.fraudguard.R
-import com.bangkit.fraudguard.data.adapters.HistoryAdapter
-import com.bangkit.fraudguard.data.dto.response.History
 import com.bangkit.fraudguard.databinding.ActivityMainBinding
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import com.bangkit.fraudguard.ui.welcome.WelcomeActivity
@@ -71,12 +63,47 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        } else if (fragmentToOpen == "article") {
+            navController.navigate(R.id.navigation_article)
+            navView.setOnNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.navigation_home -> {
+                        if (navController.currentDestination?.id == R.id.navigation_article) {
+                            navController.popBackStack()
+                        } else {
+                            navController.navigate(R.id.navigation_home)
+                        }
+                        true
+                    }
+                    else -> {
+                        NavigationUI.onNavDestinationSelected(item, navController)
+                    }
+                }
+            }
+        } else if (fragmentToOpen == "create") {
+            navController.navigate(R.id.navigation_create)
+            navView.setOnNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.navigation_home -> {
+                        if (navController.currentDestination?.id == R.id.navigation_create) {
+                            navController.popBackStack()
+                        } else {
+                            navController.navigate(R.id.navigation_home)
+                        }
+                        true
+                    }
+                    else -> {
+                        NavigationUI.onNavDestinationSelected(item, navController)
+                    }
+                }
+            }
         }
 
 
         setupViewModel()
         checkUserSession()
     }
+
 
     private fun setupViewModel() {
         viewModel = ViewModelProvider(

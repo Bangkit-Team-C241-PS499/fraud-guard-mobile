@@ -9,7 +9,7 @@
     android:layout_marginHorizontal="8dp"
     android:background="@drawable/list_menu_bar"
     app:cardCornerRadius="10dp"
-    card_view:cardElevation="8dp">
+    card_view:cardElevation="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="200dp"
