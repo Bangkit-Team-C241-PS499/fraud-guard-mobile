@@ -2,9 +2,11 @@ package com.bangkit.fraudguard.data.adapters
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,16 +17,32 @@ import com.bangkit.fraudguard.ui.history.HistoryDetailActivity
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
+import kotlin.math.round
 
 class HistoryAdapter: ListAdapter<History, HistoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(private val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(history: History) {
             binding.title.text = "${history.message}"
             binding.historyDate.text = "${formatDate(history.createdAt)} WIB"
-            if(history.label=="scam"){
+            val roundedPrediction = history.prediction?.let { round(it).toInt() }
+            binding.historyResultPrediction.text = "${roundedPrediction.toString()}%"
+            if(history.label=="penipuan"){
+                binding.historyTag.text = "Penipuan"
+                binding.historyTag.backgroundTintList = ColorStateList.valueOf("#C44444".toColorInt())
+                binding.historyResultPrediction.setTextColor("#C44444".toColorInt())
                 binding.icon.setImageResource(R.drawable.spam)
-            }else{
+            } else if(history.label=="normal"){
+                binding.historyTag.text = "Aman"
+                binding.historyTag.backgroundTintList = ColorStateList.valueOf("#4BC86E".toColorInt())
+                binding.historyResultPrediction.setTextColor("#4BC86E".toColorInt())
                 binding.icon.setImageResource(R.drawable.not_spam)
+            } else if(history.label=="promo"){
+                binding.historyTag.text = "Promosi"
+                binding.historyTag.backgroundTintList = ColorStateList.valueOf("#C0CB43".toColorInt())
+                binding.historyResultPrediction.setTextColor("#C0CB43".toColorInt())
+                binding.icon.setImageResource(R.drawable.promo)
+            } else {
+                binding.predictionResult.visibility = android.view.View.INVISIBLE
             }
 
         }
