@@ -15,5 +15,7 @@
     <color name="disabled_color">#11284A</color>
     <color name="disabled_text_color">#8E8E8E</color>
     <color name="toast_background">#4D000000</color>
+    <color name="green">#4BC86E</color>
+    <color name="yellow">#C0CB43</color>
 
 </resources>

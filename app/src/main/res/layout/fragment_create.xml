@@ -70,16 +70,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/list_detail_bar"
-        android:elevation="5dp"
+        android:elevation="10dp"
         android:orientation="horizontal"
         android:padding="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heading_card"
-        app:layout_constraintVertical_bias="0.087">
+        app:layout_constraintTop_toBottomOf="@+id/heading_card">
 
         <ImageView
             android:layout_width="75dp"
@@ -98,7 +96,7 @@
                 style="@style/DescriptionBlack14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mari Lindungi Akun Anda!"
+                android:text="Mari Lindungi Privasi Anda!"
                 android:textColor="#1B5BBB"
                 android:textStyle="bold" />
 
@@ -106,8 +104,10 @@
                 android:id="@+id/question"
                 style="@style/DescriptionBlack14"
                 android:layout_width="wrap_content"
+                android:justificationMode="inter_word"
+                android:layout_marginEnd="12dp"
                 android:layout_height="wrap_content"
-                android:text="Cobalah aplikasi kami. Janganlah jadi korban selanjutnya"
+                android:text="Jangan percaya dengan teks yang dikirim melalui SMS, Email, Website, Sosial media, atau yang lainnya. Cek teks tersebut dengan menggunakan aplikasi ini."
                 android:tint="@color/white" />
         </LinearLayout>
 
@@ -119,56 +119,79 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="18dp"
         android:text="Input Text"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/middle" />
 
-    <EditText
-        android:id="@+id/text_message"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/DescriptionBlack14"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginStart="18dp"
+
         android:layout_marginEnd="18dp"
-        android:background="@drawable/list_detail_bar"
-        android:hint="Masukkan teks disini........."
-        android:padding="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.033" />
+     >
+
+        <com.bangkit.fraudguard.ui.customView.CustomEditText
+            android:id="@+id/text_message"
+            style="@style/DescriptionBlack12"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top|start"
+            android:gravity="top|start"
+            android:hint="Masukkan teks disini..."
+            android:inputType="text"
+         />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <Button
         android:id="@+id/CheckButton"
-        style="@style/DescriptionBlack14"
-        android:layout_width="235dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="108dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
         android:backgroundTint="@color/main_button_backgroud_selector"
+        android:enabled="false"
+        android:fontFamily="@font/poppins_bold"
+
+        android:paddingVertical="10dp"
         android:text="Periksa"
-        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/CheckCancelButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_message"
-        android:enabled="false"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/CheckCancelButton"
         style="@style/DescriptionBlack14"
-        android:layout_width="235dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="@color/white"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingVertical="10dp"
         android:text="Batal"
         android:textColor="@color/secondary"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CheckButton" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

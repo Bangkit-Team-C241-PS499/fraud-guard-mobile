@@ -11,7 +11,7 @@ data class PredictResponse(
 	val userId: Int? = null,
 
 	@field:SerializedName("prediction")
-	val prediction: Int? = null,
+	val prediction: Any? = null,
 
 	@field:SerializedName("id")
 	val id: String? = null,

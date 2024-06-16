@@ -12,6 +12,7 @@ import com.bangkit.fraudguard.databinding.ActivityHistoryDetailBinding
 import com.bangkit.fraudguard.ui.main.MainViewModel
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import com.bangkit.fraudguard.ui.welcome.WelcomeActivity
+import kotlin.math.round
 
 class HistoryDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryDetailBinding
@@ -40,29 +41,27 @@ class HistoryDetailActivity : AppCompatActivity() {
                     binding.textLabel.text = responseBody.message
                     if(responseBody.label=="penipuan"){
                         binding.bottom.setBackgroundResource(R.drawable.list_detail_spam_desc_bar)
-                        binding.textDescTop.text = "Spam"
+                        binding.textDescTop.text = "Penipuan"
                         binding.textDesc.marginStart
                         binding.textDescTop.setTextColor(Color.parseColor("#C44444"))
-                        val decimalValue = responseBody.prediction as? Double ?: 0.0
-                        val percentValue = decimalValue // Jika prediction sudah dalam skala 0-100
-                        binding.textDescPercent.text = "%.0f%%".format(percentValue)
+                        val roundedPrediction = responseBody.prediction?.let { round(it).toInt() }
+                        binding.textDescPercent.text = "${roundedPrediction.toString()}%"
                         binding.textDescPercent.setTextColor(Color.parseColor("#C44444"))
                         binding.imageSign.setImageResource(R.drawable.not_secure)
                     }else if(responseBody.label=="normal"){
                         binding.bottom.setBackgroundResource(R.drawable.list_detail_desc_bar)
-                        binding.textDescTop.text = "Non-Spam"
+                        binding.textDescTop.text = "Aman"
                         binding.textDescTop.setTextColor(Color.parseColor("#3FC464"))
-                        val decimalValue = responseBody.prediction as? Double ?: 0.0
-                        val percentValue = decimalValue // Jika prediction sudah dalam skala 0-100
-                        binding.textDescPercent.text = "%.0f%%".format(percentValue)
+                        val roundedPrediction = responseBody.prediction?.let { round(it).toInt() }
+                        binding.textDescPercent.text = "${roundedPrediction.toString()}%"
                     }
                     else if(responseBody.label=="promo"){
                         binding.bottom.setBackgroundResource(R.drawable.list_detail_desc_bar)
                         binding.textDescTop.text = "Promo"
                         binding.textDescTop.setTextColor(Color.parseColor("#3FC464"))
-                        val decimalValue = responseBody.prediction as? Double ?: 0.0
-                        val percentValue = decimalValue // Jika prediction sudah dalam skala 0-100
-                        binding.textDescPercent.text = "%.0f%%".format(percentValue)
+                        val roundedPrediction = responseBody.prediction?.let { round(it).toInt() }
+                        binding.textDescPercent.text = "${roundedPrediction.toString()}%"
+
                     }
                 }
             }
