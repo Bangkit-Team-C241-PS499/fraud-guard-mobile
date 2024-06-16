@@ -10,9 +10,8 @@ data class History(
 	val userId: Int? = null,
 	val id: String? = null,
 	val label: String? = null,
-	val prediction: Float? = null,
 	val message: String? = null,
-	val timestamp: String? = null,
+	val prediction: Float? = null,
 	val updatedAt: String? = null,
 )
 
