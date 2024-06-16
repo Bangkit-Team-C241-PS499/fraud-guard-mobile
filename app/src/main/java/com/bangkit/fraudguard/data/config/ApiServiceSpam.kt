@@ -5,7 +5,6 @@ import com.bangkit.fraudguard.data.dto.request.PredictRequest
 import com.bangkit.fraudguard.data.dto.request.UpdateProfileRequest
 import com.bangkit.fraudguard.data.dto.response.ChangePhotoResponse
 import com.bangkit.fraudguard.data.dto.response.History
-import com.bangkit.fraudguard.data.dto.response.HistoryResponse
 import com.bangkit.fraudguard.data.dto.response.ObjectResponse
 import com.bangkit.fraudguard.data.dto.response.PredictResponse
 import com.bangkit.fraudguard.data.dto.response.ProfileResponse

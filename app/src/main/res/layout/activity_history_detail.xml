@@ -124,6 +124,21 @@
             android:text="Non-Spam"
             android:textColor="#3FC464" />
 
+
+        <TextView
+            android:id="@+id/text_desc_percent"
+            style="@style/DescriptionBlack18"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="250dp"
+            android:layout_marginEnd="9dp"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:text="0%"
+            android:textColor="#3FC464" />
+
         <TextView
             android:id="@+id/text_desc"
             style="@style/DescriptionBlack14"

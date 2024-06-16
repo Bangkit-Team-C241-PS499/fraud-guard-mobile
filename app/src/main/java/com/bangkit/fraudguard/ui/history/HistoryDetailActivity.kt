@@ -43,11 +43,26 @@ class HistoryDetailActivity : AppCompatActivity() {
                         binding.textDescTop.text = "Spam"
                         binding.textDesc.marginStart
                         binding.textDescTop.setTextColor(Color.parseColor("#C44444"))
+                        val decimalValue = responseBody.prediction as? Double ?: 0.0
+                        val percentValue = decimalValue // Jika prediction sudah dalam skala 0-100
+                        binding.textDescPercent.text = "%.0f%%".format(percentValue)
+                        binding.textDescPercent.setTextColor(Color.parseColor("#C44444"))
                         binding.imageSign.setImageResource(R.drawable.not_secure)
-                    }else{
+                    }else if(responseBody.label=="normal"){
                         binding.bottom.setBackgroundResource(R.drawable.list_detail_desc_bar)
                         binding.textDescTop.text = "Non-Spam"
                         binding.textDescTop.setTextColor(Color.parseColor("#3FC464"))
+                        val decimalValue = responseBody.prediction as? Double ?: 0.0
+                        val percentValue = decimalValue // Jika prediction sudah dalam skala 0-100
+                        binding.textDescPercent.text = "%.0f%%".format(percentValue)
+                    }
+                    else if(responseBody.label=="promo"){
+                        binding.bottom.setBackgroundResource(R.drawable.list_detail_desc_bar)
+                        binding.textDescTop.text = "Promo"
+                        binding.textDescTop.setTextColor(Color.parseColor("#3FC464"))
+                        val decimalValue = responseBody.prediction as? Double ?: 0.0
+                        val percentValue = decimalValue // Jika prediction sudah dalam skala 0-100
+                        binding.textDescPercent.text = "%.0f%%".format(percentValue)
                     }
                 }
             }
