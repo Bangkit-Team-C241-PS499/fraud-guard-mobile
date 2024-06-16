@@ -4,18 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bangkit.fraudguard.R
 import com.bangkit.fraudguard.data.dto.request.PredictRequest
 import com.bangkit.fraudguard.databinding.FragmentCreateBinding
+import com.bangkit.fraudguard.databinding.FragmentHomeBinding
 import com.bangkit.fraudguard.ui.customView.showCustomToast
 import com.bangkit.fraudguard.ui.history.HistoryDetailActivity
+import com.bangkit.fraudguard.ui.main.MainActivity
 import com.bangkit.fraudguard.ui.main.MainViewModel
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import com.bangkit.fraudguard.ui.welcome.WelcomeActivity
@@ -55,14 +57,6 @@ class CreateFragment : Fragment() {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             setMyButtonEnable()
-            val isTextEmpty = s.isNullOrEmpty()
-
-            // Update the visibility of the button based on the text
-            if (isTextEmpty) {
-                hideBottomNavigationBarAndButton()
-            } else {
-                showBottomNavigationBarAndButton()
-            }
         }
 
         override fun afterTextChanged(s: Editable?) {}
@@ -90,35 +84,12 @@ class CreateFragment : Fragment() {
                     }
                 }
                 else{
-                    showCustomToast(requireContext(), "Prediksi gagal. Masukan teks yang valid.", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), "Prediksi gagal. Masukan teks yang valid.", Toast.LENGTH_SHORT).show()
                 }
             })
         }
         binding.textMessage.addTextChangedListener(textWatcher)
         setMyButtonEnable()
 
-        binding.textMessage.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                hideBottomNavigationBarAndButton()
-            } else {
-                showBottomNavigationBarAndButton()
-            }
-        }
-    }
-    override fun onResume() {
-        super.onResume()
-        checkUserSession()
-        binding.textMessage.text?.clear()
-        setMyButtonEnable()
-    }
-
-    private fun hideBottomNavigationBarAndButton() {
-        binding.CheckButton.visibility = View.GONE
-        binding.CheckCancelButton.visibility = View.GONE
-    }
-
-    private fun showBottomNavigationBarAndButton() {
-        binding.CheckButton.visibility = View.VISIBLE
-        binding.CheckCancelButton.visibility = View.VISIBLE
     }
 }
