@@ -25,6 +25,7 @@ datastorePreferencesCoreJvm = "1.1.1"
 activity-ktx = "1.7.2"
 glide = "4.16.0"
 shimmer = "0.5.0"
+playServicesCastFramework = "21.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -54,7 +55,9 @@ okhttp3-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor"
 okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version = "4.11.0" }
 shimmer = { group = "com.facebook.shimmer", name = "shimmer", version = "0.5.0" }
 shimmer-rv = { group = "com.todkars.shimmer", name = "shimmer-recyclerview", version = "0.4.0"}
-
+imagePicker = { group = "com.github.dhaval2404", name = "imagepicker", version = "2.1" }
+imagePicker-support = { group = "com.github.dhaval2404", name = "imagepicker-support", version = "1.7.1" }
+play-services-cast-framework = { group = "com.google.android.gms", name = "play-services-cast-framework", version.ref = "playServicesCastFramework" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

@@ -27,6 +27,7 @@ import com.bangkit.fraudguard.R
 import com.bangkit.fraudguard.data.dto.response.ChangePhotoResponse
 import com.bangkit.fraudguard.data.dto.response.ProfileResponse
 import com.bangkit.fraudguard.databinding.ActivityDetailProfileBinding
+import com.bangkit.fraudguard.databinding.CustomDialogBinding
 import com.bangkit.fraudguard.ui.customView.showCustomToast
 import com.bangkit.fraudguard.ui.main.MainViewModel
 import com.bangkit.fraudguard.ui.profile.editPassword.ChangePasswordActivity
@@ -117,26 +118,27 @@ class DetailProfileActivity : AppCompatActivity() {
     }
 
     private fun changePhotoProfile(){
-        val options = arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Cancel")
+        val options = arrayOf<CharSequence>("Ambil dengan Kamera", "Pilih dari galeri", "Batal")
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Change Profile Picture")
+        builder.setTitle("Pilih Foto Profile")
 
         builder.setItems(options) { dialog, item ->
             when {
-                options[item] == "Take Photo" -> {
+                options[item] == "Ambil dengan Kamera" -> {
                     val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     startActivityForResult(takePictureIntent, TAKE_PHOTO)
                 }
-                options[item] == "Choose from Gallery" -> {
+                options[item] == "Pilih dari galeri" -> {
                     val pickPhotoIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     pickPhotoIntent.type = "image/*"
                     startActivityForResult(Intent.createChooser(pickPhotoIntent, "Select Picture"), PICK_IMAGE)
                 }
-                options[item] == "Cancel" -> {
+                options[item] == "Batal" -> {
                     dialog.dismiss()
                 }
             }
         }
+
 
         builder.show()
     }
@@ -154,7 +156,7 @@ class DetailProfileActivity : AppCompatActivity() {
                     Glide.with(this).load(profile.photoUrl).into(binding.profileImage)
                 }
             } else {
-                showCustomToast(this, "Failed to load profile", Toast.LENGTH_SHORT)
+                showCustomToast(this, "Gagal memuat profile data", Toast.LENGTH_SHORT)
             }
         })
     }
@@ -209,7 +211,8 @@ class DetailProfileActivity : AppCompatActivity() {
             try {
                 viewModel.updateProfilePicture(body).observe(this@DetailProfileActivity){ response ->
                     if (response.isSuccessful){
-                        showCustomToast(this@DetailProfileActivity, "Upload Success", Toast.LENGTH_SHORT)
+                        showCustomToast(this@DetailProfileActivity, "Ubah Profile Berhasil!", Toast.LENGTH_SHORT)
+                        observeProfile()
                     } else {
                         var msg = extractErrorMessage(response)
                         showCustomToast(this@DetailProfileActivity, msg, Toast.LENGTH_SHORT)
@@ -217,7 +220,7 @@ class DetailProfileActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                showCustomToast(this@DetailProfileActivity, "An error occurred: ${e.message}", Toast.LENGTH_SHORT)
+                showCustomToast(this@DetailProfileActivity, "Terjadi Error: ${e.message}", Toast.LENGTH_SHORT)
             }
         }
     }

@@ -77,5 +77,4 @@ dependencies {
     implementation(libs.okhttp3.logging)
     implementation(libs.okhttp3)
 
-
 }
