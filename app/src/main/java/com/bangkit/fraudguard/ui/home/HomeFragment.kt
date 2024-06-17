@@ -17,6 +17,7 @@ import com.bangkit.fraudguard.data.dto.response.History
 import com.bangkit.fraudguard.data.dto.response.ProfileResponse
 import com.bangkit.fraudguard.databinding.FragmentHomeBinding
 import com.bangkit.fraudguard.ui.customView.showCustomToast
+import com.bangkit.fraudguard.ui.faq.FaqActivity
 import com.bangkit.fraudguard.ui.main.MainActivity
 import com.bangkit.fraudguard.ui.main.MainViewModel
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
@@ -101,6 +102,11 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), MainActivity::class.java).apply {
                 putExtra("fragmentToOpen", "profile")
             }
+            startActivity(intent)
+        }
+
+        binding.middle.setOnClickListener() {
+            val intent = Intent(requireContext(), FaqActivity::class.java)
             startActivity(intent)
         }
     }

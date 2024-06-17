@@ -74,8 +74,9 @@
         android:paddingTop="8dp"
         android:paddingRight="18dp"
         android:paddingBottom="8dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upper_guideline">
+        app:layout_constraintTop_toBottomOf="@+id/heading_card">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/icon"
@@ -165,7 +166,7 @@
             android:layout_toEndOf="@id/icon_riwayat_deteksi"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
-            android:text="Riwayat Deteksi"
+            android:text="Riwayat Prediksi Scam"
             style="@style/DescriptionBlack14"
             android:textColor="@android:color/black"
             />
@@ -211,7 +212,7 @@
             android:layout_toEndOf="@id/icon_hapus_riwayat_deteksi"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
-            android:text="Hapus Riwayat Deteksi"
+            android:text="Hapus Riwayat Prediksi Scam"
             style="@style/DescriptionBlack14"
             android:textColor="@android:color/black"
             />

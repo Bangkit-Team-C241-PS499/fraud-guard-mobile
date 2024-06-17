@@ -53,7 +53,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="0dp"
                     android:lineSpacingMultiplier="0.5"
-                    android:text="Sudah periksa spam hari ini ?"
+                    android:text="Sudah periksa scam hari ini ?"
                     android:textColor="@color/grey"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -211,7 +211,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Bagaimana Kami Bisa Mendekteksi Spam?"
+            android:text="Bagaimana Kami Bisa Mendekteksi Scam?"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
@@ -234,7 +234,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="10dp"
-        android:text="Riwayat Deteksi Spam Anda"
+        android:text="Riwayat Deteksi Scam Anda"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/middle"
         app:layout_constraintVertical_bias="0.782" />
@@ -272,6 +272,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/navbar_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_history">
@@ -283,7 +284,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
-            android:text="Kamu belum melakukan \npengececekan spam"
+            android:text="Kamu belum melakukan \npengececekan scam"
             android:textColor="@color/secondary"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
