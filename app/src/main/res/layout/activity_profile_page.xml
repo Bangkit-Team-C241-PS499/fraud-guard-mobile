@@ -36,23 +36,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/background"
-        android:scaleType="fitStart"
+        android:scaleType="fitXY"
         android:src="@drawable/background_top"
+        app:layout_constraintBottom_toTopOf="@id/background_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/background_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="431dp"
-        android:layout_marginBottom="300dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.63"
+        app:layout_constraintGuide_percent="0.25"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/upper_guideline"
@@ -69,12 +70,13 @@
         android:layout_marginEnd="18dp"
         android:background="@drawable/list_menu_bar"
         android:elevation="5dp"
+        android:layout_marginTop="24dp"
         android:paddingLeft="18dp"
         android:paddingTop="8dp"
         android:paddingRight="18dp"
         android:paddingBottom="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upper_guideline">
+        app:layout_constraintTop_toBottomOf="@+id/heading_card">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/icon"
