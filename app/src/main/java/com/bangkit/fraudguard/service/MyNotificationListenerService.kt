@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import android.provider.Telephony
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
@@ -40,6 +39,7 @@ class MyNotificationListenerService : NotificationListenerService() {
             getUserToken()
         }
         createNotificationChannel()
+
     }
 
     private suspend fun getUserToken() {
@@ -54,6 +54,7 @@ class MyNotificationListenerService : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)
+
         sbn?.let { notification ->
             if (notification.packageName == "com.whatsapp") {
                 val extras = notification.notification.extras
@@ -93,7 +94,7 @@ class MyNotificationListenerService : NotificationListenerService() {
                 }
 
 
-            } else if (notification.packageName == Telephony.Sms.getDefaultSmsPackage(this)) {
+            } else if (notification.packageName == "com.android.mms" || notification.packageName == "com.google.android.apps.messaging" || notification.packageName == "com.android.messaging" || notification.packageName == "com.samsung.android.messaging" || notification.packageName == "com.google.android.apps.nbu.messaging" || notification.packageName == "com.google.android.apps.messaging" || notification.packageName == "com.google.android.talk" || notification.packageName == "com.google.android.apps.googlevoice") {
                 Log.d("Gabing", "SMS detected")
                 val extras = notification.notification.extras
                 val title = extras.getString("android.title")
@@ -112,8 +113,9 @@ class MyNotificationListenerService : NotificationListenerService() {
 
                 }
 
-            } else{
-                Log.d("cek sms", notification.packageName)
+            }
+            else{
+                Log.d("cek sms", notification.notification.extras.toString())
 
             }
         }

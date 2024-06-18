@@ -25,7 +25,7 @@ import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 import retrofit2.Response
 
-class RegisterActivity : AppCompatActivity() {
+class   RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var viewModel: RegisterViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
