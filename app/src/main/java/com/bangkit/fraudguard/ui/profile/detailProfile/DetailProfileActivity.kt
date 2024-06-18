@@ -27,7 +27,6 @@ import com.bangkit.fraudguard.R
 import com.bangkit.fraudguard.data.dto.response.ChangePhotoResponse
 import com.bangkit.fraudguard.data.dto.response.ProfileResponse
 import com.bangkit.fraudguard.databinding.ActivityDetailProfileBinding
-import com.bangkit.fraudguard.databinding.CustomDialogBinding
 import com.bangkit.fraudguard.ui.customView.showCustomToast
 import com.bangkit.fraudguard.ui.main.MainViewModel
 import com.bangkit.fraudguard.ui.profile.editPassword.ChangePasswordActivity
@@ -94,7 +93,7 @@ class DetailProfileActivity : AppCompatActivity() {
         observeProfile()
     }
     private fun checkMediaPermissions() {
-        val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED)
 
         if (permissions.any { ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }) {
             ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE)

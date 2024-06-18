@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var notificationManagerSystem: android.app.NotificationManager
+
     companion object {
         private const val TAG = "MainActivity"
         private const val PERMISSION_REQUEST_CODE = 1
@@ -54,7 +55,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
-        this.window.setFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN, android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        this.window.setFlags(
+            android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
         supportActionBar?.hide()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -88,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                         }
                         true
                     }
+
                     else -> {
                         NavigationUI.onNavDestinationSelected(item, navController)
                     }
@@ -105,6 +110,7 @@ class MainActivity : AppCompatActivity() {
                         }
                         true
                     }
+
                     else -> {
                         NavigationUI.onNavDestinationSelected(item, navController)
                     }
@@ -122,6 +128,7 @@ class MainActivity : AppCompatActivity() {
                         }
                         true
                     }
+
                     else -> {
                         NavigationUI.onNavDestinationSelected(item, navController)
                     }
@@ -139,6 +146,7 @@ class MainActivity : AppCompatActivity() {
                         }
                         true
                     }
+
                     else -> {
                         NavigationUI.onNavDestinationSelected(item, navController)
                     }
@@ -158,15 +166,19 @@ class MainActivity : AppCompatActivity() {
 
 
     fun checkAndRequestPermissions() {
-        val PostNotificationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+        val PostNotificationPermission =
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
         val smsPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS)
-        val notificationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE)
+        val notificationPermission = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE
+        )
 
         val listPermissionsNeeded = mutableListOf<String>()
 
-        if(PostNotificationPermission != PackageManager.PERMISSION_GRANTED){
+        if (PostNotificationPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.POST_NOTIFICATIONS)
-        }   
+        }
 
         if (smsPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.READ_SMS)
@@ -177,34 +189,45 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (listPermissionsNeeded.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), PERMISSION_REQUEST_CODE)
+            ActivityCompat.requestPermissions(
+                this,
+                listPermissionsNeeded.toTypedArray(),
+                PERMISSION_REQUEST_CODE
+            )
         }
 
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             PERMISSION_REQUEST_CODE -> {
                 val perms = HashMap<String, Int>()
                 // Initialize the map with both permissions
                 perms[Manifest.permission.READ_SMS] = PackageManager.PERMISSION_GRANTED
-                perms[Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE] = PackageManager.PERMISSION_GRANTED
+                perms[Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE] =
+                    PackageManager.PERMISSION_GRANTED
                 // Fill with actual results from user
                 for (i in permissions.indices) {
                     perms[permissions[i]] = grantResults[i]
                 }
 
-                if(perms[Manifest.permission.POST_NOTIFICATIONS] == PackageManager.PERMISSION_DENIED){
+                if (perms[Manifest.permission.POST_NOTIFICATIONS] == PackageManager.PERMISSION_DENIED) {
 
                 }
                 // Check for both permissions
                 if (perms[Manifest.permission.READ_SMS] == PackageManager.PERMISSION_GRANTED
-                    && perms[Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE] == PackageManager.PERMISSION_GRANTED) {
+                    && perms[Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE] == PackageManager.PERMISSION_GRANTED
+                ) {
 
-                } else if ( perms[Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE] != PackageManager.PERMISSION_GRANTED){
+                } else if (perms[Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE] != PackageManager.PERMISSION_GRANTED) {
 
                     if (isNotificationServiceEnabled(this) == false) {
+
                         showCustomAlertDialog(
                             "Peringatan",
                             "Aplikasi ini membutuhkan akses ke notifikasi untuk dapat berjalan dengan baik. Aktifkan akses notifikasi pada menu pengaturan.",
@@ -216,6 +239,8 @@ class MainActivity : AppCompatActivity() {
                             {}
                         )
                     }
+
+
                 } else {
 
                     return
@@ -225,6 +250,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     fun isNotificationServiceEnabled(context: Context): Boolean {
         val enabledListeners = NotificationManagerCompat.getEnabledListenerPackages(context)
         return enabledListeners.contains(context.packageName)
@@ -321,68 +347,68 @@ class MainActivity : AppCompatActivity() {
             return
         }
         val dto = PredictRequest(text)
-        viewModel.predict(dto).observe(this)  { response ->
+        viewModel.predict(dto).observe(this) { response ->
 
-                if (response.isSuccessful) {
-                    val predictResponse = response.body()
-                    val idDetection = predictResponse?.id
-                    val predictionDouble: Double? = predictResponse?.prediction as? Double
+            if (response.isSuccessful) {
+                val predictResponse = response.body()
+                val idDetection = predictResponse?.id
+                val predictionDouble: Double? = predictResponse?.prediction as? Double
 
-                    val formattedPrediction = predictionDouble?.let {
-                        String.format("%.2f", it)
-                    }
-                    var wordPlatform = if (platform == "WhatsApp" || platform == "SMS") {
-                        "Pesan"
-                    } else if (platform == "Gmail"){
-                        "Email"
-                    } else {
-                        "teks"
-                    }
-
-                    if (predictResponse?.label == "penipuan") {
-                        var title =
-                            "Bahaya !! $wordPlatform dari $sender melalui $platform terindikasi sebagai penipuan"
-                        var message =
-                            "$wordPlatform dari $sender terindikasi sebagai penipuan dengan confidence-level sebesar $formattedPrediction%"
-                        if (idDetection != null) {
-                            sendAlert(title, message, platform, idDetection)
-                        }
-                    } else if (predictResponse?.label == "promo") {
-                        var title =
-                            "$wordPlatform dari $sender melalui $platform terindikasi sebagai promo dengan confidence-level sebesar $formattedPrediction%"
-                        var message =
-                            "Tetap hati-hati dengan isi $wordPlatform nya. Pastikan nomornya terdaftar di website/kontak resmi institusi terkait"
-                        if (idDetection != null) {
-                            sendAlert(title, message, platform, idDetection)
-                        }
-
-                    } else if (predictResponse?.label == "normal") {
-                        var title = "Kelihatannya $wordPlatform dari $sender aman"
-                        var message =
-                            "Tidak ada yang mencurigakan dalam $wordPlatform ini. Tetap waspada ya!"
-                        if (idDetection != null) {
-                            sendAlert(title, message, platform, idDetection)
-                        }
-
-                    }
-
-                    var message = "$wordPlatform dari $sender terindikasi sebagai "
+                val formattedPrediction = predictionDouble?.let {
+                    String.format("%.2f", it)
+                }
+                var wordPlatform = if (platform == "WhatsApp" || platform == "SMS") {
+                    "Pesan"
+                } else if (platform == "Gmail") {
+                    "Email"
                 } else {
-                    var message = extractErrorMessage(response)
-                    if (message.contains("too long")) {
-                        message = "Kami tidak bisa mendeteksi teks yang terlalu panjang."
-                    } else if (message.contains("array")) {
-                        message = "Ada kesalahan dari server kami. Coba lagi nanti."
+                    "teks"
+                }
+
+                if (predictResponse?.label == "penipuan") {
+                    var title =
+                        "Bahaya !! $wordPlatform dari $sender melalui $platform terindikasi sebagai penipuan"
+                    var message =
+                        "$wordPlatform dari $sender terindikasi sebagai penipuan dengan confidence-level sebesar $formattedPrediction%"
+                    if (idDetection != null) {
+                        sendAlert(title, message, platform, idDetection)
                     }
-                    sendAlert(
-                        "Maaf, Kami tidak bisa mendeteksi teks dari $sender melalui $platform",
-                        message,
-                        platform,
-                        "0"
-                    )
+                } else if (predictResponse?.label == "promo") {
+                    var title =
+                        "$wordPlatform dari $sender melalui $platform terindikasi sebagai promo dengan confidence-level sebesar $formattedPrediction%"
+                    var message =
+                        "Tetap hati-hati dengan isi $wordPlatform nya. Pastikan nomornya terdaftar di website/kontak resmi institusi terkait"
+                    if (idDetection != null) {
+                        sendAlert(title, message, platform, idDetection)
+                    }
+
+                } else if (predictResponse?.label == "normal") {
+                    var title = "Kelihatannya $wordPlatform dari $sender aman"
+                    var message =
+                        "Tidak ada yang mencurigakan dalam $wordPlatform ini. Tetap waspada ya!"
+                    if (idDetection != null) {
+                        sendAlert(title, message, platform, idDetection)
+                    }
 
                 }
+
+                var message = "$wordPlatform dari $sender terindikasi sebagai "
+            } else {
+                var message = extractErrorMessage(response)
+                if (message.contains("too long")) {
+                    message = "Kami tidak bisa mendeteksi teks yang terlalu panjang."
+                } else if (message.contains("array")) {
+                    message = "Ada kesalahan dari server kami. Coba lagi nanti."
+                }
+                sendAlert(
+                    "Maaf, Kami tidak bisa mendeteksi teks dari $sender melalui $platform",
+                    message,
+                    platform,
+                    "0"
+                )
+
             }
+        }
 
 
     }
