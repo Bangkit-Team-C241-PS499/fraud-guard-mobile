@@ -1,16 +1,21 @@
 package com.bangkit.fraudguard.ui.main
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,6 +25,7 @@ import com.bangkit.fraudguard.R
 import com.bangkit.fraudguard.data.dto.request.PredictRequest
 import com.bangkit.fraudguard.data.dto.response.PredictResponse
 import com.bangkit.fraudguard.databinding.ActivityMainBinding
+import com.bangkit.fraudguard.ui.customView.showCustomAlertDialog
 import com.bangkit.fraudguard.ui.history.HistoryDetailActivity
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import com.bangkit.fraudguard.ui.welcome.WelcomeActivity
@@ -34,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var notificationManagerSystem: android.app.NotificationManager
     companion object {
         private const val TAG = "MainActivity"
+        private const val PERMISSION_REQUEST_CODE = 1
     }
 
     private val smsReceiver = object : BroadcastReceiver() {
@@ -145,9 +152,83 @@ class MainActivity : AppCompatActivity() {
         checkUserSession()
         registerReceiver(smsReceiver, android.content.IntentFilter("SMS_RECEIVED_ACTION"))
         createNotificationChannel()
+        checkAndRequestPermissions()
 
     }
 
+
+    fun checkAndRequestPermissions() {
+        val PostNotificationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+        val smsPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS)
+        val notificationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE)
+
+        val listPermissionsNeeded = mutableListOf<String>()
+
+        if(PostNotificationPermission != PackageManager.PERMISSION_GRANTED){
+            listPermissionsNeeded.add(Manifest.permission.POST_NOTIFICATIONS)
+        }   
+
+        if (smsPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_SMS)
+        }
+
+        if (notificationPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE)
+        }
+
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), PERMISSION_REQUEST_CODE)
+        }
+
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            PERMISSION_REQUEST_CODE -> {
+                val perms = HashMap<String, Int>()
+                // Initialize the map with both permissions
+                perms[Manifest.permission.READ_SMS] = PackageManager.PERMISSION_GRANTED
+                perms[Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE] = PackageManager.PERMISSION_GRANTED
+                // Fill with actual results from user
+                for (i in permissions.indices) {
+                    perms[permissions[i]] = grantResults[i]
+                }
+
+                if(perms[Manifest.permission.POST_NOTIFICATIONS] == PackageManager.PERMISSION_DENIED){
+
+                }
+                // Check for both permissions
+                if (perms[Manifest.permission.READ_SMS] == PackageManager.PERMISSION_GRANTED
+                    && perms[Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE] == PackageManager.PERMISSION_GRANTED) {
+
+                } else if ( perms[Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE] != PackageManager.PERMISSION_GRANTED){
+
+                    if (isNotificationServiceEnabled(this) == false) {
+                        showCustomAlertDialog(
+                            "Peringatan",
+                            "Aplikasi ini membutuhkan akses ke notifikasi untuk dapat berjalan dengan baik. Aktifkan akses notifikasi pada menu pengaturan.",
+                            "Buka Pengaturan",
+                            "Batal",
+                            {
+                                startActivity(Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"))
+                            },
+                            {}
+                        )
+                    }
+                } else {
+
+                    return
+
+
+                }
+            }
+        }
+    }
+    fun isNotificationServiceEnabled(context: Context): Boolean {
+        val enabledListeners = NotificationManagerCompat.getEnabledListenerPackages(context)
+        return enabledListeners.contains(context.packageName)
+    }
 
     private fun setupViewModel() {
         viewModel = ViewModelProvider(
@@ -316,5 +397,6 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
 
 }

@@ -11,6 +11,7 @@ import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.bangkit.fraudguard.R
 import com.bangkit.fraudguard.data.config.ApiServiceSpam
 import com.bangkit.fraudguard.data.config.getApiServiceSpam
@@ -51,6 +52,8 @@ class MyNotificationListenerService : NotificationListenerService() {
             Log.e("NotificationListener", "Error getting user token")
         }
     }
+
+
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)

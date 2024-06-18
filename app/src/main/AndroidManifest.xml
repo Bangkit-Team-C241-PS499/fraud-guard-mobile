@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
@@ -84,7 +85,7 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -107,6 +108,7 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
 
 
     </application>
