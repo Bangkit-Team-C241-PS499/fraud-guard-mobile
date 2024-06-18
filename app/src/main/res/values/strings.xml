@@ -61,4 +61,5 @@
     <string name="failed_register_text">Gagal registrasi !</string>
     <string name="password_mismatch">Kombinasi password baru tidak sama\n</string>
     <string name="selengkapnya_text"><u>Selengkapnya</u></string>
+    <string name="notification_listener_service_label">notification_label\n\t</string>
 </resources>

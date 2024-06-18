@@ -117,6 +117,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
         setupViewModel()
         checkUserSession()
     }

@@ -3,7 +3,6 @@ package com.bangkit.fraudguard.ui.history
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.marginStart
 import androidx.lifecycle.ViewModelProvider
@@ -48,19 +47,26 @@ class HistoryDetailActivity : AppCompatActivity() {
                         binding.textDescPercent.text = "${roundedPrediction.toString()}%"
                         binding.textDescPercent.setTextColor(Color.parseColor("#C44444"))
                         binding.imageSign.setImageResource(R.drawable.not_secure)
+                        binding.textDesc.text = "Sepertinya teks tersebut merupakan penipuan. Jangan tergiur dengan tawaran yang terlalu bagus untuk menjadi kenyataan. Jika Anda merasa curiga, jangan ragu untuk menghubungi pihak terkait. Anda juga dapat mencari informasi detailnya melalui google atau aplikasi lainnya."
                     }else if(responseBody.label=="normal"){
                         binding.bottom.setBackgroundResource(R.drawable.list_detail_desc_bar)
                         binding.textDescTop.text = "Aman"
                         binding.textDescTop.setTextColor(Color.parseColor("#3FC464"))
                         val roundedPrediction = responseBody.prediction?.let { round(it).toInt() }
                         binding.textDescPercent.text = "${roundedPrediction.toString()}%"
+                        binding.imageSign.setImageResource(R.drawable.secure)
+                        binding.textDescPercent.setTextColor(Color.parseColor("#3FC464"))
+                        binding.textDesc.text = "Sepertinya teks tersebut aman. Namun, Anda tetap harus berhati-hati. Pastikan pengirim pesannya merupakan provider, perusahaan, atau institusi lainnya yang terkenal. Jika Anda merasa curiga, jangan ragu untuk menghubungi pihak terkait."
                     }
                     else if(responseBody.label=="promo"){
-                        binding.bottom.setBackgroundResource(R.drawable.list_detail_desc_bar)
+                        binding.bottom.setBackgroundResource(R.drawable.list_detail_promo_desc)
                         binding.textDescTop.text = "Promo"
-                        binding.textDescTop.setTextColor(Color.parseColor("#3FC464"))
+                        binding.textDescTop.setTextColor(Color.parseColor("#C0CB43"))
                         val roundedPrediction = responseBody.prediction?.let { round(it).toInt() }
                         binding.textDescPercent.text = "${roundedPrediction.toString()}%"
+                        binding.imageSign.setImageResource(R.drawable.promo_envelope)
+                        binding.textDescPercent.setTextColor(Color.parseColor("#C0CB43"))
+                        binding.textDesc.text = "Sepertinya teks tersebut merupakan promosi. Meskipun begitu, Anda harus tetap berhati-hati. Pastikan pengirim pesannya merupakan provider, perusahaan, atau institusi lainnya yang terkenal."
 
                     }
                 }

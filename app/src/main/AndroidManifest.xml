@@ -6,13 +6,27 @@
         android:name="android.hardware.camera"
         android:required="false" />
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+        tools:ignore="ProtectedPermissions" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 
 
     <application
@@ -66,6 +80,8 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Fraudguard">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -73,6 +89,26 @@
             </intent-filter>
         </activity>
 
+
+        <service
+            android:name=".service.MyNotificationListenerService"
+            android:exported="true"
+            android:label="@string/notification_listener_service_label"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+        <receiver
+            android:name=".service.SmsListener"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+
     </application>
+
 
 </manifest>
