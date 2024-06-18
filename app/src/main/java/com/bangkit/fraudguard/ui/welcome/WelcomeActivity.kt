@@ -33,10 +33,10 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.LoginButton.setOnClickListener {  // Gunakan loginButton dengan huruf kecil
+        binding.LoginButton.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
-        binding.RegisterButton.setOnClickListener {  // Gunakan registerButton dengan huruf kecil
+        binding.RegisterButton.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
     }

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.faq.FaqActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/heading_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/heading_title"
+            style="@style/HeadingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:background="@drawable/heading_bar"
+            android:paddingStart="21dp"
+            android:paddingTop="27dp"
+            android:paddingBottom="27dp"
+            android:text="Bagaimana kami bisa mendeteksi Scam ?"
+            android:textColor="#000000"
+            tools:ignore="RtlSymmetry" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/background"
+        android:scaleType="fitXY"
+        android:src="@drawable/background_top"
+        app:layout_constraintBottom_toTopOf="@id/background_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/background_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_percent="0.25"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/cl_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/list_menu_bar"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:padding="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heading_card">
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/DescriptionGrey12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:justificationMode="inter_word"
+            android:text="Berikut adalah cara kami membuat model pendeteksian spam: "
+            android:textColor="@color/secondary" />
+
+        <TextView
+            style="@style/DescriptionGrey12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:justificationMode="inter_word"
+
+            android:text="1. Kami mencoba mencari dataset yang berisi spam, scam, promo, dan normal teks dengan bahasa Indonesia"
+            android:textColor="@color/black" />
+
+        <TextView
+            style="@style/DescriptionGrey12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
+            android:layout_marginBottom="8dp"
+            android:text="2. Kami melakukan beberapa langkah praproses teks sebagai berikut:"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="18dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/DescriptionGrey12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text="- Menghapus Stopwords dan Kata Terlarang:\nKami menghapus kata-kata umum yang tidak bermakna (stopwords) dan kata-kata yang tidak senonoh atau tidak sesuai (banned words)."
+                android:textColor="@color/black" />
+            <TextView
+                style="@style/DescriptionGrey12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+
+                android:text="- Normalisasi Kata Slang:\nKami mengubah kata-kata slang menjadi bentuk baku sesuai dengan Kamus Besar Bahasa Indonesia (KBBI)"
+                android:textColor="@color/black" />
+
+            <TextView
+                style="@style/DescriptionGrey12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+
+                android:text="- Stemming:\nKami melakukan stemming pada setiap kata untuk mengubahnya ke bentuk dasar."
+                android:textColor="@color/black" />
+
+
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/DescriptionGrey12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:justificationMode="inter_word"
+            android:text="3. Kami melakukan tokenisasi teks dan membangun model deteksi spam menggunakan TensorFlow dan Keras."
+            android:textColor="@color/black" />
+
+        <TextView
+            style="@style/DescriptionGrey12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
+            android:layout_marginBottom="8dp"
+
+            android:text="4. Kami mengubah model tersebut kedalam bentuk .tfjs. Lalu, kita dapat menggunakan model tersebut hanya dengan menginput teks saja. Model tersebut dideploy di Google Cloud Platform dengan menggunakan NodeJS dan MYSQL dengan sistem keamanan Oauth 2.0"
+            android:textColor="@color/black" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

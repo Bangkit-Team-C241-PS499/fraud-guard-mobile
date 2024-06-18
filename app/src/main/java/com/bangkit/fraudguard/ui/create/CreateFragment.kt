@@ -1,60 +1,143 @@
 package com.bangkit.fraudguard.ui.create
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bangkit.fraudguard.R
+import com.bangkit.fraudguard.data.dto.request.PredictRequest
+import com.bangkit.fraudguard.data.dto.response.PredictResponse
+import com.bangkit.fraudguard.databinding.FragmentCreateBinding
+import com.bangkit.fraudguard.ui.customView.showCustomToast
+import com.bangkit.fraudguard.ui.history.HistoryDetailActivity
+import com.bangkit.fraudguard.ui.main.MainViewModel
+import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
+import com.bangkit.fraudguard.ui.welcome.WelcomeActivity
+import org.json.JSONObject
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CreateFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CreateFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private var _binding: FragmentCreateBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var viewModel: MainViewModel
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create, container, false)
+        _binding = FragmentCreateBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+        setupViewModel()
+        checkUserSession()
+        setupAction()
+        return root
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CreateFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CreateFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun checkUserSession() {
+        viewModel.getSession().observe(viewLifecycleOwner, Observer { userModel ->
+            if (!userModel.isLogin) {
+                startActivity(Intent(requireActivity(), WelcomeActivity::class.java))
+                requireActivity().finish()
             }
+        })
+    }
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(
+            requireActivity(), ViewModelFactory.getInstance(requireContext())
+        ).get(MainViewModel::class.java)
+    }
+    private val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            setMyButtonEnable()
+            val isTextEmpty = s.isNullOrEmpty()
+
+            // Update the visibility of the button based on the text
+            if (isTextEmpty) {
+                hideBottomNavigationBarAndButton()
+            } else {
+                showBottomNavigationBarAndButton()
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {}
+    }
+    private fun setMyButtonEnable(){
+        val message = binding.textMessage.text.toString().isNotEmpty()
+        binding.CheckButton.isEnabled = message
+    }
+
+    private fun setupAction(){
+        binding.CheckCancelButton.setOnClickListener() {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+        binding.CheckButton.setOnClickListener(){
+            val message = binding.textMessage.text.toString()
+            val requestDTO = PredictRequest(message)
+            viewModel.predict(requestDTO).observe(viewLifecycleOwner, Observer { response ->
+                if(response.isSuccessful){
+                    val body = response.body()
+                    if(body != null){
+                        val intent = Intent(requireContext(), HistoryDetailActivity::class.java).apply {
+                            putExtra("id", body.id)
+                        }
+                        startActivity(intent)
+                    }
+                }
+                else{
+                    var errorMessage = extractErrorMessage(response)
+                    showCustomToast(requireContext(), errorMessage, Toast.LENGTH_SHORT)
+
+                }
+            })
+        }
+        binding.textMessage.addTextChangedListener(textWatcher)
+        setMyButtonEnable()
+
+        binding.textMessage.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                hideBottomNavigationBarAndButton()
+            } else {
+                showBottomNavigationBarAndButton()
+            }
+        }
+
+    }
+
+
+
+    override fun onResume() {
+        super.onResume()
+        checkUserSession()
+        binding.textMessage.text?.clear()
+        setMyButtonEnable()
+    }
+
+    private fun hideBottomNavigationBarAndButton() {
+        binding.CheckButton.visibility = View.GONE
+        binding.CheckCancelButton.visibility = View.GONE
+    }
+
+    private fun showBottomNavigationBarAndButton() {
+        binding.CheckButton.visibility = View.VISIBLE
+        binding.CheckCancelButton.visibility = View.VISIBLE
+    }
+
+    private fun extractErrorMessage(response: Response<PredictResponse>): String {
+        return try {
+            val json = response.errorBody()?.string()
+            val jsonObject = JSONObject(json)
+            jsonObject.getString("error")
+        } catch (e: Exception) {
+            getString(R.string.failed_login_text)
+        }
     }
 }

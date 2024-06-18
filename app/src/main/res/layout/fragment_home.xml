@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/white"
+    android:background="@color/white"
     tools:context=".ui.welcome.WelcomeActivity">
 
     <androidx.cardview.widget.CardView
@@ -14,21 +14,68 @@
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/heading_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/heading_title"
-            style="@style/HeadingTitle"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:paddingLeft="21dp"
-            android:paddingTop="27dp"
-            android:paddingBottom="27dp"
-            android:text="Profile Anda"
-            android:textColor="#000000" />
+            android:layout_height="match_parent"
+            android:background="@drawable/heading_bar"
+
+            android:padding="18dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/heading_title"
+                    style="@style/HeadingTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:text="Halo,"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:id="@+id/heading_subtitle"
+                    style="@style/DescriptionBlack14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:lineSpacingExtra="0dp"
+                    android:lineSpacingMultiplier="0.5"
+                    android:text="Sudah periksa scam hari ini ?"
+                    android:textColor="@color/grey"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/heading_title"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_profile_blank"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.cardview.widget.CardView>
 
     <ImageView
@@ -36,291 +83,285 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/background"
-        android:scaleType="fitStart"
+        android:scaleType="fitXY"
         android:src="@drawable/background_top"
-        app:layout_constraintBottom_toTopOf="@+id/background_guideline"
+        app:layout_constraintBottom_toTopOf="@id/background_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/background_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.48" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_percent="0.25"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/upper_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.12" />
+        app:layout_constraintGuide_begin="88dp" />
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/rl_list_detail_user"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView"
+        style="@style/DescriptionBlack14_semibold"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        android:background="@drawable/list_menu_bar"
-        android:elevation="5dp"
-        android:paddingLeft="18dp"
-        android:paddingTop="8dp"
-        android:paddingRight="18dp"
-        android:paddingBottom="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Artikel Terbaru"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upper_guideline">
+        app:layout_constraintTop_toBottomOf="@+id/heading_card"
+        tools:ignore="MissingConstraints" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:elevation="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bottom_background"
-            app:shapeAppearanceOverlay="@style/roundedImageView" />
+    <TextView
+        android:id="@+id/artikel_selengkapnya"
+        style="@style/DescriptionBlack14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="18dp"
+        android:text="Selengkapnya"
+        android:textColor="@color/secondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heading_card"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_articles"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="12dp"
+        android:foregroundGravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/middle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_article_small" />
+
+    <LinearLayout
+        android:id="@+id/rv_articles_shimmer"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/middle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0">
+
+        <include
+            layout="@layout/item_article_small_shimmer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <include
+            layout="@layout/item_article_small_shimmer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <include
+            layout="@layout/item_article_small_shimmer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <include
+            layout="@layout/item_article_small_shimmer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@id/middle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/list_menu_bar"
+        android:backgroundTint="#1B5BBB"
+        android:elevation="5dp"
+
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_articles">
 
         <TextView
             android:id="@+id/text"
-            style="@style/DescriptionBlack14_semibold"
+            style="@style/DescriptionBlack14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_centerVertical="true"
+            android:text="Bagaimana Kami Bisa Mendekteksi Scam?"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_find_in_page_24"
+            app:tint="@color/white" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_history"
+        style="@style/DescriptionBlack14_semibold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="10dp"
+        android:text="Riwayat Deteksi Scam Anda"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/middle"
+        app:layout_constraintVertical_bias="0.782" />
+
+    <TextView
+        android:id="@+id/textViewSeeMore"
+        style="@style/DescriptionBlack14"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="10dp"
+        android:text="Selengkapnya"
+        android:textColor="#1B5BBB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/middle"
+        app:layout_constraintVertical_bias="0.782" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_history"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/navbar_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_history" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_empty_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/navbar_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_history">
+
+        <TextView
+            android:id="@+id/tv_empty_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="Kamu belum melakukan \npengececekan scam"
+            android:textColor="@color/secondary"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginVertical="10dp"
+            android:src="@drawable/envelope"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_empty_history" />
+
+
+        <Button
+            android:id="@+id/btn_cek_spam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/icon"
-            android:text="Gabriel Zebaoth Krisopras Putra" />
+            android:backgroundTint="@color/secondary"
+            android:drawableEnd="@drawable/baseline_add_box_24"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Cek Sekarang"
+            android:textColorLink="@color/secondary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView2" />
 
-        <TextView
-            android:id="@+id/secondary_text"
-            style="@style/DescriptionGrey12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text"
-            android:layout_alignStart="@id/text"
-            android:layout_marginTop="4dp"
-            android:text="Gabiiing13@gmail.com" />
 
-        <ImageView
-            android:id="@+id/arrow"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/baseline_arrow_forward_ios_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </RelativeLayout>
-    <!--    riwayat deteksi-->
-
-    <TextView
-        android:id="@+id/tv_riwayat"
-        style="@style/DescriptionBlack12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="12dp"
-        android:text="Riwayat"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rl_list_detail_user"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="238dp" />
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/rl_list_riwayat_deteksi"
+    <LinearLayout
+        android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_riwayat"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingLeft="18dp"
-        android:paddingRight="18dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="0dp"
         android:layout_marginStart="18dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="18dp"
-        android:background="@drawable/list_menu_bar"
-        android:elevation="5dp">
+        android:layout_marginBottom="20dp"
+        android:gravity="top"
 
-        <ImageView
-            android:id="@+id/icon_riwayat_deteksi"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/baseline_history_24" />
 
-        <TextView
-            android:id="@+id/text_riwayat_deteksi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/icon_riwayat_deteksi"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:text="Riwayat Deteksi"
-            style="@style/DescriptionBlack14"
-            android:textColor="@android:color/black"
-            />
-
-        <ImageView
-            android:id="@+id/arrow_riwayat_deteksi"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/baseline_arrow_forward_ios_24" />
-
-    </RelativeLayout>
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/rl_list_hapus_deteksi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/navbar_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rl_list_riwayat_deteksi"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingLeft="18dp"
-        android:paddingRight="18dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        android:background="@drawable/list_menu_bar"
-        android:elevation="5dp">
-
-        <ImageView
-            android:id="@+id/icon_hapus_riwayat_deteksi"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/baseline_auto_delete_24" />
-
-        <TextView
-            android:id="@+id/text_hapus_riwayat_deteksi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/icon_hapus_riwayat_deteksi"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:text="Hapus Riwayat Deteksi"
-            style="@style/DescriptionBlack14"
-            android:textColor="@android:color/black"
-            />
-
-        <ImageView
-            android:id="@+id/arrow_hapus_riwayat_deteksi"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/baseline_arrow_forward_ios_24" />
-
-    </RelativeLayout>
-
-
-
-
-    <!--    personalisasi akun-->
-    <TextView
-        android:id="@+id/tv_personalisasi"
-        style="@style/DescriptionBlack12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="12dp"
-        android:text="Personalisasi"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rl_list_hapus_deteksi" />
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/rl_list_ganti_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_personalisasi"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingLeft="18dp"
-        android:paddingRight="18dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        android:background="@drawable/list_menu_bar"
-        android:elevation="5dp">
-
-        <ImageView
-            android:id="@+id/icon_ganti_password"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/outline_vpn_key_24" />
-
-        <TextView
-            android:id="@+id/text_ganti_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/icon_ganti_password"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:text="Ganti Password"
-            style="@style/DescriptionBlack14"
-            android:textColor="@android:color/black"
-            />
-
-        <ImageView
-            android:id="@+id/arrow_ganti_password"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/baseline_arrow_forward_ios_24" />
-
-    </RelativeLayout>
-
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/rl_list_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rl_list_ganti_password"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingLeft="18dp"
-        android:paddingRight="18dp"
-        android:backgroundTint="@color/red_10"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        android:background="@drawable/list_menu_bar"
+        app:layout_constraintTop_toBottomOf="@+id/tv_history">
         >
 
-        <ImageView
-            android:id="@+id/icon_logout"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/baseline_power_settings_new_24"
-            />
+        <include layout="@layout/item_history_shimmer" />
 
-        <TextView
-            android:id="@+id/text_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/icon_logout"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:text="Logout"
-            style="@style/DescriptionBlack14"
-            android:textColor="@color/red"
-            />
+        <include layout="@layout/item_history_shimmer" />
 
-    </RelativeLayout>
+        <include layout="@layout/item_history_shimmer" />
+
+        <include layout="@layout/item_history_shimmer" />
+
+        <include layout="@layout/item_history_shimmer" />
+
+        <include layout="@layout/item_history_shimmer" />
+
+        <include layout="@layout/item_history_shimmer" />
+
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/navbar_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

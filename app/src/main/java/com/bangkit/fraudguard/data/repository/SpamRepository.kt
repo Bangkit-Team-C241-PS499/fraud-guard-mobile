@@ -4,9 +4,12 @@ package com.bangkit.fraudguard.data.repository
 import com.bangkit.fraudguard.data.config.ApiServiceSpam
 import com.bangkit.fraudguard.data.config.getApiServiceSpam
 import com.bangkit.fraudguard.data.dto.request.ChangePasswordRequest
+import com.bangkit.fraudguard.data.dto.request.PredictRequest
 import com.bangkit.fraudguard.data.dto.request.UpdateProfileRequest
 import com.bangkit.fraudguard.data.dto.response.ChangePhotoResponse
+import com.bangkit.fraudguard.data.dto.response.History
 import com.bangkit.fraudguard.data.dto.response.ObjectResponse
+import com.bangkit.fraudguard.data.dto.response.PredictResponse
 import com.bangkit.fraudguard.data.dto.response.ProfileResponse
 import com.bangkit.fraudguard.data.model.UserModel
 import com.bangkit.fraudguard.data.preferences.UserPreference
@@ -46,6 +49,14 @@ class SpamRepository private constructor(
 
     }
 
+    fun getHistory(): Call<List<History>>{
+        return apiServiceSpam.getHistory()
+    }
+
+    fun historyDetail(id:String): Call<History>{
+        return apiServiceSpam.getDetailHistory(id)
+    }
+
     fun updateProfile(objectDTO : UpdateProfileRequest) : Call<ObjectResponse>{
         return apiServiceSpam.updateProfile(objectDTO)
 
@@ -59,6 +70,15 @@ class SpamRepository private constructor(
     fun updateProfilePicture(photoFile : MultipartBody.Part) : Call<ChangePhotoResponse>{
         return apiServiceSpam.updateProfilePicture(photoFile)
 
+    }
+
+    fun deleteAllPrediction() : Call<ObjectResponse>{
+        return apiServiceSpam.deleteAllPredictions()
+
+    }
+
+    fun predict(objectDTO: PredictRequest): Call<PredictResponse>{
+        return apiServiceSpam.predict(objectDTO)
     }
 
 

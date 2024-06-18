@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+
+    android:layout_marginHorizontal="18dp"
+    android:layout_marginVertical="8dp"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="12dp"
+            android:src="@drawable/not_spam"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <LinearLayout
+            android:id="@+id/content_linear_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:orientation="vertical"
+            android:paddingVertical="8dp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toStartOf="@+id/prediction_result"
+            card_view:layout_constraintStart_toEndOf="@+id/icon"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/DescriptionBlack14_semibold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Halo Selamat siang , ini dari bank BNI. Ingin menawari Anda Sejumlah Saldo 50 juta" />
+
+
+            <TextView
+                android:id="@+id/history_date"
+                style="@style/DescriptionGrey12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/list_menu_bar"
+                android:gravity="start"
+                android:text="30 April 2024 14.20"
+                android:textColor="@color/secondary" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/prediction_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:orientation="vertical"
+
+            android:text="normal"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/history_result_prediction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="70%"
+                android:maxLength="4"
+                android:textColor="@color/green"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/history_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tag_shape"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingHorizontal="8dp"
+                android:backgroundTint="@color/green"
+                android:paddingVertical="4dp"
+                android:text="normal"
+                android:layout_gravity="center"
+                android:gravity="center"
+
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

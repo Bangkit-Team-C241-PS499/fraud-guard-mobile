@@ -5,9 +5,33 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:backgroundTint="@color/white"
     tools:context=".ui.welcome.WelcomeActivity">
+    <RelativeLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:visibility="gone"
+        android:backgroundTint="@color/broken_white"
+        android:background="@drawable/list_menu_bar"
+        android:elevation="10dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/secondary"
+            android:progressTint="@color/white"
+            android:visibility="visible"
+            android:padding="10dp"/>
+    </RelativeLayout>
     <androidx.cardview.widget.CardView
         android:id="@+id/heading_card"
         android:layout_width="match_parent"
@@ -36,20 +60,21 @@
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/broken_white"
         android:contentDescription="@string/background"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@drawable/bottom_background_full_width"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="305dp" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <TextView
         android:id="@+id/welcomeTitle"
@@ -72,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="646dp" />
+        app:layout_constraintGuide_percent="0.14" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_input_layout"
@@ -89,7 +114,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan nama lengkap Anda"
-            android:text="Gabriel Ginting" />
+            android:inputType="text"
+            android:padding="12dp"
+            android:text=""
+            app:inputType="nama" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -98,9 +126,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="4dp"
         android:text="Nama Lengkap"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTitle" />
 
     <TextView
         android:id="@+id/register_email_text"
@@ -109,6 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="4dp"
         android:text="Email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_input_layout" />
@@ -119,7 +150,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
-        android:focusable="false"
+        android:backgroundTint="@color/grey"
+        android:enabled="false"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_email_text">
@@ -129,7 +162,8 @@
             style="@style/DescriptionBlack12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="gabiiing13@gmail.com"
+            android:backgroundTint="@color/grey"
+            android:text=""
 
 
             />
@@ -208,9 +242,14 @@
     <Button
         android:id="@+id/edit_profile_button"
         style="@style/ButtonMain"
-        android:layout_width="235dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:paddingVertical="10dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="36dp"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="16sp"
         android:backgroundTint="@color/main_button_backgroud_selector"
         android:elevation="10dp"
         android:text="Ubah"
@@ -222,17 +261,6 @@
         app:layout_constraintTop_toBottomOf="@+id/button_guideline"
         app:layout_constraintVertical_bias="0.105" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateTint="@color/secondary"
-        android:progressTint="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/edit_profile_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

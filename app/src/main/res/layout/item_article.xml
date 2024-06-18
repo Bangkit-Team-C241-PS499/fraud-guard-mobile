@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/list_menu_bar"
+    app:cardCornerRadius="10dp"
+    android:layout_marginHorizontal="18dp"
+    android:layout_marginBottom="8dp"
+    card_view:cardElevation="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="8dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="left"
+            android:layout_marginEnd="12dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_splash"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedArticleImageView" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.32" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/DescriptionBlack14_bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:maxLines="2"
+            android:paddingEnd="8dp"
+            android:text="Amankan Akun Anda awldhjkbflajkbdfakdbhjlfadklbfjhjkladflkbadfklbj MFA"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/author"
+            style="@style/DescriptionBlack12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:paddingEnd="8dp"
+            android:text="Gabriel ahjlsdbfakjbsdfajklbdf"
+            android:textColor="@color/secondary"
+            app:layout_constraintEnd_toStartOf="@id/releaseDate"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/releaseDate"
+            style="@style/DescriptionBlack12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="12 Juni 2024"
+
+            android:textColor="@color/secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/DescriptionBlack12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="3"
+            android:paddingEnd="8dp"
+
+            android:text="hajlbjdfbajklhdbfaldflhkbjadflkbadfakhjlbdfadklsbjfhadsflkbhjlkhjabdfalkhjbdsf"
+            android:textColor="@color/grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/author" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
