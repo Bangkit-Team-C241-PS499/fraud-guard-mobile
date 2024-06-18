@@ -24,31 +24,42 @@
 
             android:padding="18dp">
 
-            <TextView
-                android:id="@+id/heading_title"
-                style="@style/HeadingTitle"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:ellipsize="end"
-                android:maxLength="30"
-                android:maxLines="1"
-                android:text="Halo,"
-                android:textColor="#000000"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="RtlSymmetry" />
-
-            <TextView
-                android:id="@+id/heading_subtitle"
-                style="@style/DescriptionBlack14"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Sudah periksa spam hari ini ?"
-                android:textColor="@color/grey"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/heading_title"
-                tools:ignore="RtlSymmetry" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/heading_title"
+                    style="@style/HeadingTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:text="Halo,"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:id="@+id/heading_subtitle"
+                    style="@style/DescriptionBlack14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:lineSpacingExtra="0dp"
+                    android:lineSpacingMultiplier="0.5"
+                    android:text="Sudah periksa scam hari ini ?"
+                    android:textColor="@color/grey"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/heading_title"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/icon"
@@ -72,22 +83,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/background"
-        android:scaleType="fitStart"
+        android:scaleType="fitXY"
         android:src="@drawable/background_top"
+        app:layout_constraintBottom_toTopOf="@id/background_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/background_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="431dp"
-        android:layout_marginBottom="300dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_percent="0.63"
+        app:layout_constraintGuide_percent="0.25"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -103,9 +114,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:text="Artikel Terbaru"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/heading_card"
         tools:ignore="MissingConstraints" />
@@ -115,10 +126,10 @@
         style="@style/DescriptionBlack14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="18dp"
         android:text="Selengkapnya"
-        android:textColor="@color/white"
+        android:textColor="@color/secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/heading_card"
         tools:ignore="MissingConstraints" />
@@ -126,15 +137,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_articles"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="200dp"
         android:layout_marginTop="12dp"
         android:foregroundGravity="center"
         android:orientation="horizontal"
         android:paddingHorizontal="18dp"
         android:paddingVertical="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintBottom_toTopOf="@+id/middle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.0"
@@ -144,13 +154,13 @@
     <LinearLayout
         android:id="@+id/rv_articles_shimmer"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="200dp"
         android:layout_marginTop="12dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="18dp"
         android:paddingVertical="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintBottom_toTopOf="@+id/middle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -201,7 +211,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Bagaimana Kami Bisa Mendekteksi Spam?"
+            android:text="Bagaimana Kami Bisa Mendekteksi Scam?"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
@@ -222,9 +232,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="10dp"
-        android:text="Riwayat Deteksi Spam Anda"
+        android:text="Riwayat Deteksi Scam Anda"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/middle"
         app:layout_constraintVertical_bias="0.782" />
@@ -234,7 +244,7 @@
         style="@style/DescriptionBlack14"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="10dp"
         android:text="Selengkapnya"
@@ -250,10 +260,10 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="10dp"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/tv_history"
+        app:layout_constraintBottom_toTopOf="@id/navbar_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/navbar_guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_history" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -262,6 +272,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/navbar_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_history">
@@ -273,7 +284,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
-            android:text="Kamu belum melakukan \npengececekan spam"
+            android:text="Kamu belum melakukan \npengececekan scam"
             android:textColor="@color/secondary"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"

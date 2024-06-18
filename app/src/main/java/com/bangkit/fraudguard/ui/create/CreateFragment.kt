@@ -11,13 +11,17 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bangkit.fraudguard.R
 import com.bangkit.fraudguard.data.dto.request.PredictRequest
+import com.bangkit.fraudguard.data.dto.response.PredictResponse
 import com.bangkit.fraudguard.databinding.FragmentCreateBinding
 import com.bangkit.fraudguard.ui.customView.showCustomToast
 import com.bangkit.fraudguard.ui.history.HistoryDetailActivity
 import com.bangkit.fraudguard.ui.main.MainViewModel
 import com.bangkit.fraudguard.ui.viewModelFactory.ViewModelFactory
 import com.bangkit.fraudguard.ui.welcome.WelcomeActivity
+import org.json.JSONObject
+import retrofit2.Response
 
 class CreateFragment : Fragment() {
     private var _binding: FragmentCreateBinding? = null
@@ -89,7 +93,9 @@ class CreateFragment : Fragment() {
                     }
                 }
                 else{
-                    showCustomToast(requireContext(), "Prediksi gagal. Masukan teks yang valid.", Toast.LENGTH_SHORT)
+                    var errorMessage = extractErrorMessage(response)
+                    showCustomToast(requireContext(), errorMessage, Toast.LENGTH_SHORT)
+
                 }
             })
         }
@@ -123,5 +129,15 @@ class CreateFragment : Fragment() {
     private fun showBottomNavigationBarAndButton() {
         binding.CheckButton.visibility = View.VISIBLE
         binding.CheckCancelButton.visibility = View.VISIBLE
+    }
+
+    private fun extractErrorMessage(response: Response<PredictResponse>): String {
+        return try {
+            val json = response.errorBody()?.string()
+            val jsonObject = JSONObject(json)
+            jsonObject.getString("error")
+        } catch (e: Exception) {
+            getString(R.string.failed_login_text)
+        }
     }
 }
